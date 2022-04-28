@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import UserLinks from "../utils/UserLinks.js";
 
 import {
@@ -9,9 +10,10 @@ import {
 } from "@mui/material";
 
 const Menu = (props) => {
+    const [menuLinks, setMenuLinks] = useState(props.linksData)
     return (
         <List>
-            {props.linksData && props.linksData.map((item, index) => {
+            {menuLinks.map((item, index) => {
                 const { text, icon, linkTo } = item;
                 return (
                     <ListItem button key={text}>
