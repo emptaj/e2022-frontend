@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import UserLinks from "../utils/UserLinks.js";
+import UserLinks from "../utils/MenuLinks/UserLinks.js";
 
 import {
     List,
