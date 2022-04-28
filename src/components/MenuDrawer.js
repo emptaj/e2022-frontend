@@ -13,9 +13,7 @@ const MenuDrawer = () => {
     return (
         <div>
             <StyledDrawer variant="permanent">
-
                 <Menu />
-
             </StyledDrawer >
         </div>
     )
