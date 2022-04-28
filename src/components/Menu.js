@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import UserLinks from "../utils/MenuLinks/UserLinks.js";
 
+
 import {
     List,
     ListItem,
@@ -9,11 +10,11 @@ import {
     ListItemIcon,
 } from "@mui/material";
 
-const Menu = (props) => {
-    const [menuLinks, setMenuLinks] = useState(props.linksData)
+const Menu = ({ linksData }) => {
+    const [menuLinks, setMenuLinks] = useState(linksData)
     return (
         <List>
-            {menuLinks.map((item, index) => {
+            {menuLinks.map((item) => {
                 const { text, icon, linkTo } = item;
                 return (
                     <ListItem button key={text}>

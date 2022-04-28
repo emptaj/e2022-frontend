@@ -3,7 +3,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import Inventory2Icon from '@mui/icons-material/Inventory2';
 import LoginIcon from '@mui/icons-material/Login';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
-
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
 
 export default [{
@@ -26,4 +26,9 @@ export default [{
     icon: <LoginIcon />,
     linkTo: '/'
 },
+{
+    text: 'Profil',
+    icon: <ManageAccountsIcon />,
+    linkTo: '/'
+}
 ]
