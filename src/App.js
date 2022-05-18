@@ -1,16 +1,20 @@
 import React from "react";
 
 import './App.css';
-import Home from './pages/Home';
+import Products from './pages/Products';
 import MenuDrawer from "./components/MenuDrawer";
+import { styled, Container } from '@mui/material';
 
 function App() {
-  return (
-    <div>
-      <MenuDrawer />
-      <Home />
-    </div>
-  );
+    return (
+        <div>
+            <MenuDrawer />
+            <Container>
+
+                <Products />
+            </Container>
+        </div>
+    );
 }
 
 export default App;

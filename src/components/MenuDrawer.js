@@ -1,6 +1,6 @@
 import React from "react";
 import MuiDrawer from "@mui/material/Drawer"
-import { styled } from '@mui/material';
+import { styled, Container } from '@mui/material';
 
 import Menu from "./Menu";
 
@@ -13,7 +13,8 @@ const MenuDrawer = () => {
     return (
         <div>
             <StyledDrawer variant="permanent">
-                <Menu />
+                          <Menu />
+                  
             </StyledDrawer >
         </div>
     )
