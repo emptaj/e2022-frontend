@@ -4,10 +4,11 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import GridItem from "@material-ui/core/Grid";
 const ProductDetails = ({ id, name, description, price }) => {
 
     return (
-        <div>
+        <GridItem>
             <Card sx={{ minWidth: 275 }}>
                 <CardContent>
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
@@ -24,7 +25,7 @@ const ProductDetails = ({ id, name, description, price }) => {
                     <Button size="small">Jakiś link</Button>
                 </CardActions>
             </Card>
-        </div>
+        </GridItem>
 
     )
 }
