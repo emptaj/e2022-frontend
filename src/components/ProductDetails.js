@@ -9,7 +9,7 @@ const ProductDetails = ({ id, name, description, price }) => {
 
     return (
         <GridItem>
-            <Card sx={{ minWidth: 275 }}>
+            <Card sx={{ width: "20rem", mx: "1rem", my: "2rem" }}>
                 <CardContent>
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                         {name}
