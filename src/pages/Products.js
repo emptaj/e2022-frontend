@@ -41,7 +41,7 @@ const Products = () => {
                         price={product.price}
                         description={product.description} />)}
                 </Grid>
-                <Pagination count={pageCount} page={currentPage} onChange={changeProductsPage} color="primary"/>
+                <Pagination count={pageCount} onChange={changeProductsPage} color="primary" />
             </Paper>
 
         </div>
