@@ -4,7 +4,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import GridItem from "@material-ui/core/Grid";
+import GridItem from "@mui/material/Grid";
 const ProductDetails = ({ id, name, description, price }) => {
 
     return (
