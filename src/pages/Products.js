@@ -43,7 +43,9 @@ const Products = () => {
                         price={product.price}
                         description={product.description} />)}
                 </Grid>
-                <Pagination count={pageCount} onChange={(event) => setCurrentPage(event.target.textContent)} color="primary" />
+                <Pagination count={pageCount} onChange={(event, value) => {
+                    setCurrentPage(value)
+                }} color="primary" />
             </Paper>
 
         </div>
