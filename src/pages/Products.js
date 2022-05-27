@@ -2,7 +2,7 @@ import React from "react";
 
 import { useState, useEffect } from "react";
 import ProductDetails from "../components/ProductDetails"
-import { Pagination, Paper, Grid } from "@mui/material";
+import { Pagination, Paper, Grid, Container } from "@mui/material";
 
 const Products = () => {
     const [products, setProducts] = useState([])
@@ -35,20 +35,33 @@ const Products = () => {
     return (
         <div>
             <h1>Products</h1>
-            <Paper>
-                <Grid container spacing={1}>
-                    {products && products.map(product => <ProductDetails
-                        id={product.id}
-                        name={product.name}
-                        price={product.price}
-                        description={product.description} />)}
-                </Grid>
-                <Pagination count={pageCount} onChange={(event, value) => {
-                    setCurrentPage(value)
-                }} color="primary" />
-            </Paper>
+            <Grid container spacing={1}
+                direction="column"
+                alignItems="center"
+                justifyContent="center"
+            >
+                <Grid item>
+                    <Grid container
+                        spacing={1}
+                        alignItems="center"
+                        justifyContent="center"
+                        direction="row">
 
-        </div>
+                        {products && products.map(product => <ProductDetails
+                            id={product.id}
+                            name={product.name}
+                            price={product.price}
+                            description={product.description} />)}
+                    </Grid >
+                </Grid>
+                <Grid item>
+                    <Pagination count={pageCount} onChange={(event, value) => {
+                        setCurrentPage(value)
+                    }} color="primary" />
+                </Grid>
+            </Grid>
+
+        </div >
 
     )
 }

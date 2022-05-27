@@ -5,11 +5,18 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import GridItem from "@mui/material/Grid";
+
 const ProductDetails = ({ id, name, description, price }) => {
 
+    const cardStyle = {
+        display: "block",
+        margin: "10px",
+        minWidth: "200px",
+    };
+
     return (
-        <GridItem>
-            <Card sx={{ width: "20rem", mx: "1rem", my: "2rem" }}>
+        <GridItem md={4} xs={12}>
+            <Card style={cardStyle}>
                 <CardContent>
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                         {name}
@@ -25,7 +32,8 @@ const ProductDetails = ({ id, name, description, price }) => {
                     <Button size="small">Jakiś link</Button>
                 </CardActions>
             </Card>
-        </GridItem>
+        </GridItem >
+
 
     )
 }

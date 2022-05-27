@@ -8,16 +8,18 @@ import {
     ListItem,
     ListItemText,
     ListItemIcon,
+    Divider,
 } from "@mui/material";
 
 const Menu = ({ linksData }) => {
     const [menuLinks, setMenuLinks] = useState(linksData)
     return (
         <List>
+            <Divider />
             {menuLinks.map((item) => {
                 const { text, icon, linkTo } = item;
                 return (
-                    <ListItem button key={text}>
+                    <ListItem button key={text} divider>
                         <ListItemIcon>
                             {icon && icon}
                         </ListItemIcon>
