@@ -12,18 +12,21 @@ function Login() {
     })
 
     const StyledAvatar = styled(Avatar)({
-        backgroundColor: "#ff5722"
+        backgroundColor: "#ff5722",
+        width: 50,
+        height: 50
     })
 
     return (
         <div>
             <h1>Login page</h1>
             <Grid
-                align="center"
-            >
+                align="center">
                 <StyledPaper elevation={10}>
                     <StyledAvatar>E22</StyledAvatar>
-                    <LoginForm />
+                    <Grid item>
+                        <LoginForm />
+                    </Grid>
                 </StyledPaper>
             </Grid>
         </div >
