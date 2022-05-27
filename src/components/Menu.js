@@ -13,6 +13,13 @@ import {
 
 const Menu = ({ linksData }) => {
     const [menuLinks, setMenuLinks] = useState(linksData)
+
+    const hrefClass = {
+        textDecoration: "none",
+        color: "inherit"
+
+    }
+
     return (
         <List>
             <Divider />
@@ -23,7 +30,7 @@ const Menu = ({ linksData }) => {
                         <ListItemIcon>
                             {icon && icon}
                         </ListItemIcon>
-                        <ListItemText primary={text} />
+                        <a href={linkTo} style={hrefClass}><ListItemText primary={text} /> </a>
                     </ListItem>
                 )
 

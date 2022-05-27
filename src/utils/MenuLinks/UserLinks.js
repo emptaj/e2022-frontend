@@ -14,7 +14,7 @@ export default [{
 {
     text: 'Katalog',
     icon: <Inventory2Icon />,
-    linkTo: '/'
+    linkTo: '/products'
 },
 {
     text: 'Zamówienia',
