@@ -6,10 +6,10 @@ import AppsIcon from '@mui/icons-material/Apps';
 export default [...UserLinks, {
     text: 'Użytkownicy',
     icon: <GroupIcon />,
-    linkTo: '/'
+    linkTo: '/users'
 },
 {
     text: 'Zarządzaj',
     icon: <AppsIcon />,
-    linkTo: '/'
+    linkTo: '/admin'
 },]

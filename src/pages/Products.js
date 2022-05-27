@@ -2,7 +2,11 @@ import React from "react";
 
 import { useState, useEffect } from "react";
 import ProductDetails from "../components/ProductDetails"
-import { Pagination, Paper, Grid, Container } from "@mui/material";
+import {
+    Pagination,
+    Grid,
+
+} from "@mui/material";
 
 const Products = () => {
     const [products, setProducts] = useState([])

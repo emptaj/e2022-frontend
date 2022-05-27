@@ -14,21 +14,21 @@ export default [{
 {
     text: 'Katalog',
     icon: <Inventory2Icon />,
-    linkTo: '/'
+    linkTo: '/products'
 },
 {
     text: 'Zamówienia',
     icon: <LocalGroceryStoreIcon />,
-    linkTo: ''
+    linkTo: '/orders'
 },
 {
     text: 'Zaloguj',
     icon: <LoginIcon />,
-    linkTo: '/'
+    linkTo: '/login'
 },
 {
     text: 'Profil',
     icon: <ManageAccountsIcon />,
-    linkTo: '/'
+    linkTo: '/profile'
 }
 ]
