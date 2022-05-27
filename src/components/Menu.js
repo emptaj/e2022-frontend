@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import UserLinks from "../utils/MenuLinks/UserLinks.js";
+import { Link } from "react-router-dom";
 
 
 import {
@@ -30,12 +31,14 @@ const Menu = ({ linksData }) => {
                         <ListItemIcon>
                             {icon && icon}
                         </ListItemIcon>
-                        <a href={linkTo} style={hrefClass}><ListItemText primary={text} /> </a>
+                        <Link to={linkTo} style={hrefClass}>
+                            <ListItemText primary={text} />
+                        </Link>
                     </ListItem>
                 )
 
             })}
-        </List>
+        </List >
     )
 }
 
