@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import UserLinks from "../utils/MenuLinks/UserLinks.js";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 import {
@@ -14,12 +14,7 @@ import {
 
 const Menu = ({ linksData }) => {
     const [menuLinks, setMenuLinks] = useState(linksData)
-
-    const hrefClass = {
-        textDecoration: "none",
-        color: "inherit"
-
-    }
+    let navigate = useNavigate()
 
     return (
         <List>
@@ -27,13 +22,13 @@ const Menu = ({ linksData }) => {
             {menuLinks.map((item) => {
                 const { text, icon, linkTo } = item;
                 return (
-                    <ListItem button key={text} divider>
+                    <ListItem button divider
+                        key={text}
+                        onClick={() => navigate(linkTo)}>
                         <ListItemIcon>
                             {icon && icon}
                         </ListItemIcon>
-                        <Link to={linkTo} style={hrefClass}>
-                            <ListItemText primary={text} />
-                        </Link>
+                        <ListItemText primary={text} />
                     </ListItem>
                 )
 
