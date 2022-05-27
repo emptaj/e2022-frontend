@@ -5,9 +5,10 @@ import LoginForm from '../components/LoginForm'
 function Login() {
     const StyledPaper = styled(Paper)({
         padding: "20px",
-        height: "70vh",
+        height: "55vh",
         width: 400,
-        margin: "20px auto"
+        margin: "20px auto",
+        paddingTop: 50
 
     })
 
@@ -20,15 +21,24 @@ function Login() {
     return (
         <div>
             <h1>Login page</h1>
-            <Grid
-                align="center">
-                <StyledPaper elevation={10}>
-                    <StyledAvatar>E22</StyledAvatar>
-                    <Grid item>
+
+            <StyledPaper elevation={10}>
+                <Grid container
+                    fixed
+                    align="center"
+                    direction="row"
+                    spacing={4}
+                >
+                    <Grid item md={12} sm={12} xs={12}>
+                        <StyledAvatar>
+                            E22
+                        </StyledAvatar>
+                    </Grid>
+                    <Grid item md={12} sm={12} xs={12}>
                         <LoginForm />
                     </Grid>
-                </StyledPaper>
-            </Grid>
+                </Grid>
+            </StyledPaper>
         </div >
     )
 }
