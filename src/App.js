@@ -9,7 +9,7 @@ import SignUp from "./pages/SignUp";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
 import Home from "./pages/Home";
 import Error from "./pages/Error";
-import Login from "./pages/Login";
+import SignIn from "./pages/SignIn";
 
 function App() {
     return (
@@ -21,7 +21,7 @@ function App() {
                 <Grid item md={8} xs={8} sm={4}>
                     <Routes>
                         <Route path="/" element={<Home />} />
-                        <Route path="/login" element={<Login />} />
+                        <Route path="/login" element={<SignIn />} />
                         <Route path="/register" element={<SignUp />} />
                         <Route path="/products" element={<Products />} />
                         <Route path="*" element={<Error />} />
