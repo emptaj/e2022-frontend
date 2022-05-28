@@ -8,7 +8,7 @@ import { Grid } from "@mui/material";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
 import Home from "./pages/Home";
 import Error from "./pages/Error";
-import Login from "./pages/Login";
+import SignIn from "./pages/SignIn";
 
 function App() {
     return (
@@ -20,7 +20,7 @@ function App() {
                 <Grid item md={10} xs={6} sm={4}>
                     <Routes>
                         <Route path="/" element={<Home />} />
-                        <Route path="/login" element={<Login />} />
+                        <Route path="/login" element={<SignIn />} />
                         <Route path="/products" element={<Products />} />
                         <Route path="*" element={<Error />} />
                     </Routes>
