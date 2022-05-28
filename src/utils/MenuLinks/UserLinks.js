@@ -7,27 +7,27 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
 
 export default [{
-    text: 'Główna',
+    text: 'Home',
     icon: <HomeIcon />,
     linkTo: '/'
 },
 {
-    text: 'Katalog',
+    text: 'Catalog',
     icon: <Inventory2Icon />,
     linkTo: '/products'
 },
 {
-    text: 'Zamówienia',
+    text: 'Orders',
     icon: <LocalGroceryStoreIcon />,
     linkTo: '/orders'
 },
 {
-    text: 'Zaloguj',
+    text: 'Log in',
     icon: <LoginIcon />,
     linkTo: '/login'
 },
 {
-    text: 'Profil',
+    text: 'Profile',
     icon: <ManageAccountsIcon />,
     linkTo: '/profile'
 }
