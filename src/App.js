@@ -14,7 +14,7 @@ function App() {
     return (
         <Router>
             <Grid container>
-                <Grid item >
+                <Grid item>
                     <MenuDrawer />
                 </Grid>
                 <Grid item md={8} xs={8} sm={4}>
