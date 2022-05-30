@@ -17,7 +17,7 @@ function App() {
                 <Grid item>
                     <MenuDrawer />
                 </Grid>
-                <Grid item md={10} xs={6} sm={4}>
+                <Grid item md={8} xs={8} sm={4}>
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/login" element={<Login />} />
