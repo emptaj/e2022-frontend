@@ -29,7 +29,6 @@ const Products = () => {
 
     useEffect(() => {
         getProducts().then(response => {
-            setProducts(response.items)
             setPageCount(response.pageCount)
         });
     }, [])
@@ -44,20 +43,21 @@ const Products = () => {
                 alignItems="center"
                 justifyContent="center"
             >
-                <Grid item>
-                    <Grid container
+
+                    <Grid item container
                         spacing={1}
                         alignItems="center"
-                        justifyContent="center"
+                        justifyContent="left"
                         direction="row">
 
-                        {products && products.map(product => <ProductDetails
+                        {
+                            products && products.map(product => <ProductDetails
                             id={product.id}
                             name={product.name}
                             price={product.price}
-                            description={product.description} />)}
+                            description={product.description} />)
+                        }
                     </Grid >
-                </Grid>
                 <Grid item>
                     <Pagination count={pageCount} onChange={(event, value) => {
                         setCurrentPage(value)
