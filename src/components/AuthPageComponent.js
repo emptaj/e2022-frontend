@@ -7,11 +7,10 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { StyledAvatar } from '../components/Avatars.js';
-import SignUpComponent from '../components/SignUpComponent.js';
 
 const theme = createTheme();
 
-export default function AuthPageComponent({text, someComponent}) {
+export default function AuthPageComponent({text, SomeComponent}) {
 
   return (
     <ThemeProvider theme={theme}>
@@ -31,7 +30,7 @@ export default function AuthPageComponent({text, someComponent}) {
           <Typography component="h1" variant="h5">
            {text}
           </Typography>
-          {someComponent}
+          {<SomeComponent />}
         </Box>
       </Container>
     </ThemeProvider>

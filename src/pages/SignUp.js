@@ -6,6 +6,6 @@ import SignUpComponent from '../components/SignUpComponent.js';
 export default function SignUp() {
 
   return (
-    <AuthPageComponent text="Sign up" someComponent={<SignUpComponent />} />
+    <AuthPageComponent text="Sign up" SomeComponent={SignUpComponent} />
   );
 }
