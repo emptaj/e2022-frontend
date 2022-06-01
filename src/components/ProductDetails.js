@@ -5,14 +5,33 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import GridItem from "@mui/material/Grid";
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 
-const ProductDetails = ({ id, name, description, price }) => {
+const ProductDetails = ({ id, name, description, price, setCartItems, addOrDelete }) => {
 
     const cardStyle = {
         display: "block",
         margin: "10px",
         minWidth: "200px",
     };
+
+    const item = {
+        id: id,
+        name: name,
+        description: description,
+        price: price
+    }
+
+    function addToCart() {
+        setCartItems((listOfItems) => {
+            return [...listOfItems, item];
+        })
+    }
+
+    function removeFromCart() {
+        setCartItems((listOfItems) => listOfItems.filter(obj => obj.id !== id))
+    }
 
     return (
         <GridItem md={4} xs={12}>
@@ -30,6 +49,9 @@ const ProductDetails = ({ id, name, description, price }) => {
                 </CardContent>
                 <CardActions>
                     <Button size="small">Jakiś link</Button>
+                    <Button size="small" onClick={addOrDelete? addToCart : removeFromCart}> 
+                        {addOrDelete? <AddShoppingCartIcon color="success" /> : <RemoveShoppingCartIcon color="error" />}
+                    </Button>
                 </CardActions>
             </Card>
         </GridItem >
