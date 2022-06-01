@@ -4,6 +4,7 @@ import Inventory2Icon from '@mui/icons-material/Inventory2';
 import LoginIcon from '@mui/icons-material/Login';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import WarehouseIcon from '@mui/icons-material/Warehouse';
 
 
 export default [{
@@ -15,6 +16,11 @@ export default [{
     text: 'Catalog',
     icon: <Inventory2Icon />,
     linkTo: '/products'
+},
+{
+    text: 'Warehouses',
+    icon: <WarehouseIcon />,
+    linkTo: '/warehouses'
 },
 {
     text: 'Orders',
