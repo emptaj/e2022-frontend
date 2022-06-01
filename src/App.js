@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
 import Home from "./pages/Home";
 import Error from "./pages/Error";
 import Login from "./pages/Login";
+import Warehouses from "./pages/Warehouses";
 
 function App() {
     return (
@@ -21,7 +22,9 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/login" element={<Login />} />
-                        <Route path="/products" element={<Products />} />
+                        <Route path="/products" element={<Products API_LINK={'http://localhost:8080/api/products'}/>} />
+                        <Route path="/warehouses" element={<Warehouses API_LINK={'http://localhost:8080/api/warehouses'} />} />
+                        <Route path="/warehouses/:warehouseId/products" element={<Products API_LINK={`http://localhost:8080/api/warehouses/:warehouseId/products`} />} />
                         <Route path="*" element={<Error />} />
                     </Routes>
 
