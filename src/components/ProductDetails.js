@@ -24,13 +24,20 @@ const ProductDetails = ({ id, name, description, price, setCartItems, addOrDelet
     }
 
     function addToCart() {
-        setCartItems((listOfItems) => {
-            return [...listOfItems, item];
+        setCartItems(listOfItems => {
+            return [...listOfItems, JSON.stringify(item)];
         })
     }
-
+    // listOfItems.filter(obj => obj.id !== id)
     function removeFromCart() {
-        setCartItems((listOfItems) => listOfItems.filter(obj => obj.id !== id))
+        setCartItems(listOfItems => {
+            const index = listOfItems.indexOf(JSON.stringify(item));
+            console.log(index)
+            if(index !== -1)
+                listOfItems.splice(index, 1);
+            console.log(listOfItems)
+            return [...listOfItems];
+        })
     }
 
     return (

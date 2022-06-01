@@ -16,7 +16,7 @@ import ShoppingCart from "./pages/ShoppingCart";
 function App() {
     const [cartItems, setCartItems] = useState(() => {
         const localData = localStorage.getItem('cartItems');
-        return localData ? JSON.parse(localData) : [];
+        return localData ? JSON.parse(localData): [];
     })
 
     useEffect(() =>  localStorage.setItem('cartItems', JSON.stringify(cartItems)), [cartItems])
