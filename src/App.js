@@ -5,11 +5,12 @@ import Products from './pages/Products';
 import MenuDrawer from "./components/MenuDrawer";
 import { Grid } from "@mui/material";
 
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Home from "./pages/Home";
 import Error from "./pages/Error";
 import Login from "./pages/Login";
 import Warehouses from "./pages/Warehouses";
+import { API_LINKS } from "./constants/API_LINKS";
 
 function App() {
     return (
@@ -22,9 +23,9 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/login" element={<Login />} />
-                        <Route path="/products" element={<Products API_LINK={'http://localhost:8080/api/products'}/>} />
-                        <Route path="/warehouses" element={<Warehouses API_LINK={'http://localhost:8080/api/warehouses'} />} />
-                        <Route path="/warehouses/:warehouseId/products" element={<Products API_LINK={`http://localhost:8080/api/warehouses/:warehouseId/products`} />} />
+                        <Route path="/products" element={<Products API_LINK={API_LINKS.PRODUCTS}/>} />
+                        <Route path="/warehouses" element={<Warehouses API_LINK={API_LINKS.WAREHOUSES} />} />
+                        <Route path="/warehouses/:warehouseId/products" element={<Products API_LINK={API_LINKS.WAREHOUSES_ID_PRODUCTS} />} />
                         <Route path="*" element={<Error />} />
                     </Routes>
 
