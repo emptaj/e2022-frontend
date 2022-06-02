@@ -7,17 +7,28 @@ import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
+import { useState } from "react";
+
 export default function SignInComponent() {
+    const [signInData, setSignInData] = useState({ username: '', password: '' });
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-          username: data.get('username'),
-          password: data.get('password'),
-        });
-      };
+        //TUTAJ BĘDZIE LOGIKA ODPOWIEDZIALNA ZA LOGOWANIE
+        //BAZUJEMY NA signInData
+    };
 
-    return(
+    const handleChange = (event) => {
+        const { value, name } = event.target
+        setSignInData((prevData) => {
+            return {
+                ...prevData,
+                [name]: value
+            }
+        })
+    }
+
+    return (
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
                 autoFocus
@@ -26,6 +37,8 @@ export default function SignInComponent() {
                 id="username"
                 name="username"
                 label="Username"
+                value={signInData.username}
+                onChange={event => handleChange(event)}
                 margin="normal"
             />
             <TextField
@@ -35,6 +48,8 @@ export default function SignInComponent() {
                 name="password"
                 label="Password"
                 type="password"
+                value={signInData.password}
+                onChange={event => handleChange(event)}
                 margin="normal"
             />
             <FormControlLabel
