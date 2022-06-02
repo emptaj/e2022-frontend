@@ -5,8 +5,8 @@ import AuthPageComponent from '../components/AuthPageComponent';
 
 
 export default function SignIn() {
-  
+
   return (
-    <AuthPageComponent text='Log in' someComponent={<SignInComponent />} />
+    <AuthPageComponent text='Log in' SomeComponent={SignInComponent} />
   );
 }
