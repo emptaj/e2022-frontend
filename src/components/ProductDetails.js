@@ -28,7 +28,7 @@ const ProductDetails = ({ id, name, description, price, setCartItems, addOrDelet
             return [...listOfItems, JSON.stringify(item)];
         })
     }
-    // listOfItems.filter(obj => obj.id !== id)
+    
     function removeFromCart() {
         setCartItems(listOfItems => {
             const index = listOfItems.indexOf(JSON.stringify(item));

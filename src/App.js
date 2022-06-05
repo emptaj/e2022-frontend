@@ -10,7 +10,7 @@ import Home from "./pages/Home";
 import Error from "./pages/Error";
 import Login from "./pages/Login";
 import Warehouses from "./pages/Warehouses";
-import { API_LINKS } from "./constants/API_LINKS";
+import { STATIC_LINKS, API_LINK_WAREHOUSES_ID_PRODUCTS } from "./constants/API_LINKS";
 import ShoppingCart from "./pages/ShoppingCart";
 
 function App() {
@@ -19,7 +19,8 @@ function App() {
         return localData ? JSON.parse(localData): [];
     })
 
-    useEffect(() =>  localStorage.setItem('cartItems', JSON.stringify(cartItems)), [cartItems])
+    useEffect(() =>  localStorage.setItem('cartItems', JSON.stringify(cartItems)), 
+    [cartItems])
 
     return (
         <Router>
@@ -31,13 +32,12 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/login" element={<Login />} />
-                        <Route path="/products" element={<Products API_LINK={API_LINKS.PRODUCTS} setCartItems={setCartItems}/>} />
-                        <Route path="/warehouses" element={<Warehouses API_LINK={API_LINKS.WAREHOUSES} />} />
-                        <Route path="/warehouses/:warehouseId/products" element={<Products API_LINK={API_LINKS.WAREHOUSES_ID_PRODUCTS} />} />
+                        <Route path="/products" element={<Products API_LINK={STATIC_LINKS.PRODUCTS} setCartItems={setCartItems}/>} />
+                        <Route path="/warehouses" element={<Warehouses API_LINK={STATIC_LINKS.WAREHOUSES} />} />
+                        <Route path="/warehouses/:warehouseId/products" element={<Products API_LINK={API_LINK_WAREHOUSES_ID_PRODUCTS} setCartItems={setCartItems}/>} />
                         <Route path="/orders" element={<ShoppingCart cartItems={cartItems} setCartItems={setCartItems} />} />
                         <Route path="*" element={<Error />} />
                     </Routes>
-
                 </Grid>
             </Grid >
         </Router>
