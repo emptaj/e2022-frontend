@@ -45,7 +45,7 @@ export default function SignUpComponent() {
   }
 
   useEffect(() => {
-    if(!errorMsg.useEffect || !Object.values(errorMsg).every(x => !x))
+    if(!errorMsg.useEffect || errorMsg.username || errorMsg.email | errorMsg.password)
       return;
     registerUser();
   }, [errorMsg]);
