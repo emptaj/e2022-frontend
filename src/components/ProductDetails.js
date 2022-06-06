@@ -16,7 +16,7 @@ const ProductDetails = ({ id, name, description, price, setCartItems, addOrDelet
         minWidth: "200px",
     };
 
-    const item = {
+    const itemFromProps = {
         id: id,
         name: name,
         description: description,
@@ -25,17 +25,27 @@ const ProductDetails = ({ id, name, description, price, setCartItems, addOrDelet
 
     function addToCart() {
         setCartItems(listOfItems => {
-            return [...listOfItems, JSON.stringify(item)];
+            const itemStringified = JSON.stringify(itemFromProps);
+            const index = listOfItems.findIndex((checkedItem) => checkedItem.item === itemStringified);
+
+            if(index === -1)
+                return [...listOfItems, {item: itemStringified, quantity: 1}];
+
+            listOfItems[index].quantity += 1;
+            return [...listOfItems];
         })
     }
     
     function removeFromCart() {
         setCartItems(listOfItems => {
-            const index = listOfItems.indexOf(JSON.stringify(item));
-            console.log(index)
-            if(index !== -1)
+            const itemStringified = JSON.stringify(itemFromProps);
+            const index = listOfItems.findIndex((checkedItem) => checkedItem.item === itemStringified);
+            
+            if(listOfItems[index].quantity === 1)
                 listOfItems.splice(index, 1);
-            console.log(listOfItems)
+            else
+                listOfItems[index].quantity -= 1; 
+
             return [...listOfItems];
         })
     }
