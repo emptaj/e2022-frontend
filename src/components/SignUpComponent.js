@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
+import RegistrationAcceptedModal from './RegistrationAcceptedModal';
 import SignUpForm from './SingUpForm';
 
 const emptyErrorMsg = {
@@ -13,6 +13,7 @@ const emptyErrorMsg = {
 export default function SignUpComponent() {
   const [signUpData, setSignUpData] = useState({username: '', email: '', password: '', confPassword: ''})
   const [errorMsg, setErrorMsg] = useState(emptyErrorMsg);
+  const [isModalShown, setIsModalShown] = useState(false);
 
   async function registerUser() {
     const response = await fetch('http://localhost:8080/api/users/', {
@@ -32,6 +33,9 @@ export default function SignUpComponent() {
     console.log(data);
     if(response.status === 400)
       setErrorMsg(data);
+    else if(response.status === 201)
+      setIsModalShown(true);
+    console.log(response.status)
   }
 
   const handleChange = (event) => {
@@ -50,13 +54,11 @@ export default function SignUpComponent() {
     registerUser();
   }, [errorMsg]);
 
-  const handleSubmit = () => {
-    console.log("DATA FOR SERVER: " + JSON.stringify(signUpData))
-    registerUser();
-  };
-
   return (
-    <SignUpForm formData={signUpData} onChangeFunction={handleChange} onSubmitFunction={handleSubmit} 
-      errorMsg={errorMsg} setErrorMsg={setErrorMsg} />
+  <div>
+    <SignUpForm formData={signUpData} onChangeFunction={handleChange} errorMsg={errorMsg} 
+      setErrorMsg={setErrorMsg} />
+    <RegistrationAcceptedModal isModalShown={isModalShown} />
+  </div>  
   )
 }
