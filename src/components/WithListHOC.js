@@ -4,11 +4,15 @@ import { useState, useEffect } from "react";
 import { Grid } from "@mui/material";
 
 import PaginationComponent from "./PaginationComponent";
+import { useParams } from "react-router-dom";
 
-export default function WithListHOC ({ WrappedComponent, API_LINK, pageTitle, pageSize }) {
+export default function WithListHOC ({ WrappedComponent, API_LINK, pageTitle, pageSize, setCartItems }) {
     const [items, setItems] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [pageCount, setPageCount] = useState(1);
+
+    const warehouseId = useParams().warehouseId;
+    API_LINK = warehouseId? API_LINK(warehouseId) : API_LINK;
 
     async function getItems() {
         const response = await fetch(`${API_LINK}?page=${currentPage - 1}&size=${pageSize}`).
@@ -40,7 +44,7 @@ export default function WithListHOC ({ WrappedComponent, API_LINK, pageTitle, pa
                     justifyContent="left"
                     direction="row">
 
-                    {items && items.map(item => <WrappedComponent {...item} />)} 
+                    {items && items.map(item => <WrappedComponent {...item} setCartItems={setCartItems} addOrDelete={true} />)} 
                 </Grid >
                 <Grid item>
                     <PaginationComponent setCurrentPage={setCurrentPage} pageCount={pageCount} />
