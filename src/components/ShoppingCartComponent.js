@@ -1,6 +1,7 @@
-import { Button } from "@mui/material";
-import React from "react";
+import { Button, List, ListItem } from "@mui/material";
+import React, { useState } from "react";
 import { STATIC_LINKS } from "../constants/API_LINKS";
+import ProductDetails from "./ProductDetails";
 
 const mockupAddress = {
     country: "Polska",
@@ -13,7 +14,8 @@ const mockupAddress = {
 };
 const mockupDelieveryId = 29;
 
-export default function ShoppingCartComponent({ cartItems }) {
+export default function ShoppingCartComponent({ cartItems, setCartItems }) {
+    const [isModalShown, setIsModalShown] = useState(false);
     const orderDetails = [];
 
     cartItems.forEach(cartItem => orderDetails.push({
@@ -38,21 +40,38 @@ export default function ShoppingCartComponent({ cartItems }) {
 
 
         const data = await response.json();
-        
+        return response;
     }
 
     const onSubmitButtonClick = () => {
-        createOrder();
+        createOrder().then(response => {
+            if(response.status !== 201)
+                return;
+
+            setIsModalShown(true);
+            setCartItems([]);
+        });
     }
 
     return (
-    <Button
-        type="submit"
-        variant="contained"
-        onClick={ onSubmitButtonClick }
-        sx={{ mt: 3, mb: 2 }}
-    >
-        Confirm your order
-    </Button>
+    <div>
+        <List>
+        {
+            cartItems && cartItems.map(product =>
+            <ListItem>
+                <ProductDetails { ...JSON.parse(product.item) } setCartItems={setCartItems} addOrDelete={false} /> 
+                {product.quantity} 
+            </ListItem>)
+        }
+        </List>
+        <Button 
+            type="submit"
+            variant="contained"
+            onClick={ onSubmitButtonClick }
+            sx={{ mt: 3, mb: 2 }}
+        >
+            Confirm your order
+        </Button>
+    </div>
     )
 }
