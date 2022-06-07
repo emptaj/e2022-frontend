@@ -1,5 +1,7 @@
 import React from "react";
+
 import ProductDetails from "../components/ProductDetails";
+import ShoppingCartComponent from "../components/ShoppingCartComponent";
 
 export default function ShoppingCart({cartItems, setCartItems}) {
 
@@ -7,6 +9,7 @@ export default function ShoppingCart({cartItems, setCartItems}) {
         <div>
             <h1> Shopping cart </h1>
             {cartItems && cartItems.map(product =><div> <ProductDetails { ...JSON.parse(product.item) } setCartItems={setCartItems} addOrDelete={false} /> {product.quantity} </div> )}
+            <ShoppingCartComponent cartItems={cartItems} />
         </div>
     )
 }
