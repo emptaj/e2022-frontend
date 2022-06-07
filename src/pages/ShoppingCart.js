@@ -2,14 +2,25 @@ import { Tab, Tabs } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
 import ChooseDelieveryTypeComponent from "../components/ChooseDelieveryTypeComponent";
-
+import CreateAddressComponent from "../components/CreateAddressComponent";
 import ShoppingCartComponent from "../components/ShoppingCartComponent";
 import WithListHOC from "../components/WithListHOC";
 import { STATIC_LINKS } from "../constants/API_LINKS";
 
+const emptyAddress = {
+    country: "",
+    city: "",
+    postalCode: "",
+    street: "",
+    houseNum: "",
+    flatNum: "",
+    phone: "",
+}
+
 export default function ShoppingCart({cartItems, setCartItems}) {
     const [tableValue, setTableValue] = useState(0);
     const [deliveryTypeId, setDelieveryTypeId] = useState(0);
+    const [address, setAddress] = useState({});
 
     const handleTabChange = (event, newValue) => {
         setTableValue(newValue);
@@ -22,30 +33,29 @@ export default function ShoppingCart({cartItems, setCartItems}) {
                 <Tabs
                     value={tableValue}
                     onChange={handleTabChange}
-                    variant="scrollable"
                     scrollButtons={false}
                     aria-label="scrollable prevent tabs example"
                 >
-                    <Tab label="Cart content" />
-                    <Tab label="Delievery type" />
-                    <Tab label="Address" />
-                    <Tab label="Confirm" />
+                    <Tab label="1. Cart content" />
+                    <Tab label="2. Delievery type" />
+                    <Tab label="3. Address" />
+                    <Tab label="4. Confirm" />
                 </Tabs>
             </Box>
             {(() => {
-                switch (tableValue) {
-                    case 0: 
+                switch (tableValue+1) {
+                    case 1: 
                         return <ShoppingCartComponent cartItems={cartItems} setCartItems={setCartItems}/>;
-                    case 1:
+                    case 2:
                         return (
                             <div> 
                                 <h1>Chosen delievery id: {deliveryTypeId? deliveryTypeId : 'None'}</h1> <WithListHOC WrappedComponent={ChooseDelieveryTypeComponent} API_LINK={STATIC_LINKS.DELIEVERY_TYPES} setCartItems={setDelieveryTypeId} /> 
                             </ div>
                         )
+                    case 3: 
+                        return <CreateAddressComponent address={address} setAddress={setAddress} />
                 }
             })()}
-            {/* <ShoppingCartComponent cartItems={cartItems} setCartItems={setCartItems}/> */}
-            {/* <WithListHOC WrappedComponent={ChooseDelieveryTypeComponent} API_LINK={STATIC_LINKS.DELIEVERY_TYPES} /> */}
         </div>
     );
 }

@@ -1,5 +1,5 @@
 import { Button, List, ListItem } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import { STATIC_LINKS } from "../constants/API_LINKS";
 import ProductDetails from "./ProductDetails";
 
@@ -12,10 +12,9 @@ const mockupAddress = {
     flatNum: "6a",
     phone: "619407571"
 };
-const mockupDelieveryId = 29;
+const mockupDelieveryId = 1;
 
-export default function ShoppingCartComponent({ cartItems, setCartItems }) {
-    const [isModalShown, setIsModalShown] = useState(false);
+export default function ShoppingCartComponent({ cartItems, setCartItems }) { 
     const orderDetails = [];
 
     cartItems.forEach(cartItem => orderDetails.push({
@@ -39,7 +38,6 @@ export default function ShoppingCartComponent({ cartItems, setCartItems }) {
         }).catch(err => console.log(err));
 
 
-        const data = await response.json();
         return response;
     }
 
@@ -48,7 +46,6 @@ export default function ShoppingCartComponent({ cartItems, setCartItems }) {
             if(response.status !== 201)
                 return;
 
-            setIsModalShown(true);
             setCartItems([]);
         });
     }
