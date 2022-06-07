@@ -1,6 +1,7 @@
 import { Tab, Tabs } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
+import AfterOrderModal from "../components/AfterOrderModal";
 import ChooseDeliveryTypeComponent from "../components/ChooseDeliveryTypeComponent";
 import ConfirmOrderComponent from "../components/ConfirmOrderComponent";
 import CreateAddressComponent from "../components/CreateAddressComponent";
@@ -15,6 +16,7 @@ export default function ShoppingCart( {cartItems, setCartItems} ) {
         const tempAddress = localStorage.getItem('address');
         return tempAddress? JSON.parse(tempAddress) : {};
     });
+    const [isModalShown, setIsModalShown] = useState(false);
 
     const handleTabChange = (event, newValue) => {
         setTableValue(newValue);
@@ -58,11 +60,13 @@ export default function ShoppingCart( {cartItems, setCartItems} ) {
                         return <CreateAddressComponent address={address} setAddress={setAddress} />;
                     case 4:
                         return <ConfirmOrderComponent cartItems={cartItems} setCartItems={setCartItems} address={address} 
-                            deliveryTypeId={deliveryTypeId} setDeliveryTypeId={setDeliveryTypeId} setAddress={setAddress}/>;
+                            deliveryTypeId={deliveryTypeId} setDeliveryTypeId={setDeliveryTypeId} setAddress={setAddress}
+                            setIsModalShown={setIsModalShown} />;
                     default:
                         return {};
                 }
             })()}
+            <AfterOrderModal isModalShown={isModalShown} />
         </div>
     );
 }

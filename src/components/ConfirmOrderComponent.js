@@ -2,7 +2,7 @@ import { Alert, Button } from '@mui/material';
 import React, { useState } from 'react';
 import { STATIC_LINKS } from '../constants/API_LINKS';
 
-export default function ConfirmOrderComponent( {cartItems, setCartItems, address, setAddress, deliveryTypeId, setDeliveryTypeId} ) {
+export default function ConfirmOrderComponent( {cartItems, setCartItems, address, setAddress, deliveryTypeId, setDeliveryTypeId, setIsModalShown} ) {
     const [errorMsg, setErrorMsg] = useState({});
     const orderDetails = [];
 
@@ -46,6 +46,7 @@ export default function ConfirmOrderComponent( {cartItems, setCartItems, address
             setCartItems([]);
             setAddress({});
             setDeliveryTypeId(null);
+            setIsModalShown(true);
         });
     }
 
