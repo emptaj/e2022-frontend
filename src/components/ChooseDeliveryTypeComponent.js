@@ -2,7 +2,7 @@ import { Card, CardContent, Typography } from "@mui/material";
 import GridItem from "@mui/material/Grid";
 import React from "react";
 
-export default function ChooseDelieveryTypeComponent( {id, name, email, addressId, setCartItems} ) {
+export default function ChooseDeliveryTypeComponent( {id, name, email, addressId, setCartItems} ) {
 
     return(
         <GridItem md={4} xs={12}>
