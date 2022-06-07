@@ -1,6 +1,6 @@
 import { Tab, Tabs } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ChooseDelieveryTypeComponent from "../components/ChooseDelieveryTypeComponent";
 
 import ShoppingCartComponent from "../components/ShoppingCartComponent";

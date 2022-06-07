@@ -1,7 +1,6 @@
 import { Card, CardContent, Typography } from "@mui/material";
 import GridItem from "@mui/material/Grid";
-import React, { useState } from "react";
-import { STATIC_LINKS } from "../constants/API_LINKS";
+import React from "react";
 
 export default function ChooseDelieveryTypeComponent( {id, name, email, addressId, setCartItems} ) {
 
