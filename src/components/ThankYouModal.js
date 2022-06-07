@@ -15,7 +15,7 @@ const style = {
     p: 4,
   };
 
-export default function AfterOrderModal({ isModalShown }) {
+export default function ThankYouModal({ isModalShown, modalMessage }) {
     let navigate = useNavigate();
 
     return ( 
@@ -23,14 +23,14 @@ export default function AfterOrderModal({ isModalShown }) {
             open={isModalShown}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
-            onClick={() => navigate("/")}
+            onClick={() => navigate(modalMessage.navigate)}
         >
             <Box sx={style}>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
-                Account created
+                {modalMessage.title}
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    Your order has been accepted!
+                {modalMessage.body}
                 </Typography>
             </Box>
         </Modal>
