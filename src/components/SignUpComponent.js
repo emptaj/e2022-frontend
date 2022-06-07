@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import RegistrationAcceptedModal from './RegistrationAcceptedModal';
 import SignUpForm from './SingUpForm';
+import ThankYouModal from './ThankYouModal';
 
 const emptyErrorMsg = {
   username: '',
@@ -8,6 +8,13 @@ const emptyErrorMsg = {
   password: '',
   confPassword: '', 
   message: ''
+}
+
+const modalMessage = {
+  title: "Account created",
+  body: "Thank you very much for creating an account! \n" + 
+        "Activation code has been sent on your mailbox",
+  navigate: "/login"
 }
 
 export default function SignUpComponent() {
@@ -58,7 +65,7 @@ export default function SignUpComponent() {
   <div>
     <SignUpForm formData={signUpData} onChangeFunction={handleChange} errorMsg={errorMsg} 
       setErrorMsg={setErrorMsg} />
-    <RegistrationAcceptedModal isModalShown={isModalShown} />
+    <ThankYouModal isModalShown={isModalShown} modalMessage={modalMessage} />
   </div>  
   )
 }
