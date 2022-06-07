@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import { StyledAvatar } from '../components/Avatars.js';
+import { StyledAvatar } from '../constants/Avatars.js';
 
 const theme = createTheme();
 
