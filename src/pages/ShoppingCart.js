@@ -1,13 +1,19 @@
 import { Tab, Tabs } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
-import AfterOrderModal from "../components/AfterOrderModal";
 import ChooseDeliveryTypeComponent from "../components/ChooseDeliveryTypeComponent";
 import ConfirmOrderComponent from "../components/ConfirmOrderComponent";
 import CreateAddressComponent from "../components/CreateAddressComponent";
 import ShoppingCartComponent from "../components/ShoppingCartComponent";
+import ThankYouModal from "../components/ThankYouModal";
 import WithListHOC from "../components/WithListHOC";
 import { STATIC_LINKS } from "../constants/API_LINKS";
+
+const modalMessage = {
+    title: "Order submitted",
+    body: "Your order has been accepted!",
+    navigate: "/"
+}
 
 export default function ShoppingCart( {cartItems, setCartItems} ) {
     const [tableValue, setTableValue] = useState(0);
@@ -66,7 +72,7 @@ export default function ShoppingCart( {cartItems, setCartItems} ) {
                         return {};
                 }
             })()}
-            <AfterOrderModal isModalShown={isModalShown} />
+            <ThankYouModal isModalShown={isModalShown} modalMessage={modalMessage}/>
         </div>
     );
 }
