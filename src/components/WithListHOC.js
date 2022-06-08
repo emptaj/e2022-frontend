@@ -15,7 +15,12 @@ export default function WithListHOC ({ WrappedComponent, API_LINK, pageTitle, pa
     API_LINK = warehouseId? API_LINK(warehouseId) : API_LINK;
 
     async function getItems() {
-        const response = await fetch(`${API_LINK}?page=${currentPage - 1}&size=${pageSize}`).
+        const token = localStorage.getItem('access_token')
+        const response = await fetch(`${API_LINK}?page=${currentPage - 1}&size=${pageSize}`, {
+            headers: {
+                'Authorization': token
+            }
+        }).
             catch(err => console.log(err));
         const data = await response.json();
         return data;
