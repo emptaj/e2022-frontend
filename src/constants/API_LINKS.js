@@ -8,4 +8,8 @@ export const STATIC_LINKS = {
     DELIVERY_TYPES: BASE_LINK + "/delivery-types"
 }
 
-export const API_LINK_WAREHOUSES_ID_PRODUCTS = (id) => BASE_LINK + "/warehouses/" + id + "/products";
+export const API_LINK_WAREHOUSES_ID_PRODUCTS = (warehouseId) => `${BASE_LINK}/warehouses/${warehouseId}/products`;
+
+export const API_LINK_USERS_ORDERS = (userId) => `${BASE_LINK}/users/${userId}/orders/`;
+
+export const API_LINK_ADDRESS_ID = (addressId) => `${BASE_LINK}/addresses/${addressId}`;
