@@ -1,4 +1,4 @@
-const BASE_LINK = "http://localhost:8080/api"
+const BASE_LINK = "http://localhost:8080"
 const API = "/api"
 
 export const STATIC_LINKS = {
