@@ -18,6 +18,7 @@ export default function ConfirmOrderComponent( {cartItems, setCartItems, address
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('access_token')
             },
             body:JSON.stringify({
                     address: address,
@@ -27,7 +28,6 @@ export default function ConfirmOrderComponent( {cartItems, setCartItems, address
         }).catch(err => console.log(err));
 
         const data = await response.json();
-        console.log(data)
         if(response.status !== 201)
             setErrorMsg({
                 message: data.message,

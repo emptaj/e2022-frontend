@@ -18,7 +18,7 @@ const ProductDetails = ({ id, name, description, price, setCartItems, addOrDelet
         name: name,
         description: description,
         price: price
-    }
+    } 
 
     function addToCart() {
         setCartItems(listOfItems => {

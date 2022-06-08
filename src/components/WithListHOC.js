@@ -10,15 +10,14 @@ export default function WithListHOC ({ WrappedComponent, API_LINK, pageTitle, pa
     const [items, setItems] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [pageCount, setPageCount] = useState(1);
-
+    const [blockSetItemsEffect, setBlockSetItemsEffect] = useState(false);
     const warehouseId = useParams().warehouseId;
     API_LINK = warehouseId? API_LINK(warehouseId) : API_LINK;
 
     async function getItems() {
-        const token = localStorage.getItem('access_token')
         const response = await fetch(`${API_LINK}?page=${currentPage - 1}&size=${pageSize}`, {
             headers: {
-                'Authorization': token
+                'Authorization': localStorage.getItem('access_token')
             }
         }).
             catch(err => console.log(err));
@@ -27,11 +26,18 @@ export default function WithListHOC ({ WrappedComponent, API_LINK, pageTitle, pa
     }
     
     useEffect(() => {
+        if(!blockSetItemsEffect){
+            setBlockSetItemsEffect(true);
+            return;
+        }
         getItems().then(response => setItems(response.items));
     }, [currentPage])
 
     useEffect(() => {
-        getItems().then(response => setPageCount(response.pageCount));
+        getItems().then(response => {
+            setPageCount(response.pageCount);
+            setItems(response.items);
+        });
     }, [])
 
     return(

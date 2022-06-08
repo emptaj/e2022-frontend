@@ -37,12 +37,11 @@ export default function SignUpComponent() {
       }).catch(err => console.log(err));
     
     const data = await response.json();
-    console.log(data);
+
     if(response.status === 400)
       setErrorMsg(data);
     else if(response.status === 201)
       setIsModalShown(true);
-    console.log(response.status)
   }
 
   const handleChange = (event) => {
