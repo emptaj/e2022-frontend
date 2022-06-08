@@ -7,14 +7,11 @@ import Typography from '@mui/material/Typography';
 import GridItem from "@mui/material/Grid";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
+import { DETAIL_CARD_STYLE } from "../constants/Styles";
 
 const ProductDetails = ({ id, name, description, price, setCartItems, addOrDelete }) => {
 
-    const cardStyle = {
-        display: "block",
-        margin: "10px",
-        minWidth: "200px",
-    };
+    const cardStyle = DETAIL_CARD_STYLE;
 
     const itemFromProps = {
         id: id,

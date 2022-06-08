@@ -7,17 +7,14 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import GridItem from "@mui/material/Grid";
+import { DETAIL_CARD_STYLE } from "../constants/Styles";
 
 
 const WarehouseDetails = ({ id, name, addressId, active }) => {
 
     const isActive = active? "Active" : "Inactive";
 
-    const cardStyle = {
-        display: "block",
-        margin: "10px",
-        minWidth: "200px",
-    };
+    const cardStyle = DETAIL_CARD_STYLE;
 
     return (
         <GridItem md={4} xs={12}>
