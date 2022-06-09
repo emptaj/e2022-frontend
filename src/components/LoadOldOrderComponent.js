@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { API_LINK_ADDRESS_ID, API_LINK_ORDER_ID, API_LINK_PRODUCT_ID } from "../constants/API_LINKS";
+import refreshToken from "../constants/RefreshToken";
 import ShoppingCart from "../pages/ShoppingCart";
 
 const localStorageNames = {
@@ -15,6 +16,10 @@ async function getFromServer(link) {
         }
     }).catch(err => console.log(err));
     const data = await response.json();
+
+    if(response.status === 401 && data.error_message.includes("The Token has expired"))
+        refreshToken(getFromServer, link)
+
     return data;
 }
 
