@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Grid } from "@mui/material";
 
 import PaginationComponent from "./PaginationComponent";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import refreshToken from "../constants/RefreshToken";
 
 export default function WithListHOC({ WrappedComponent, API_LINK, pageTitle, pageSize, setCartItems }) {
@@ -13,6 +13,7 @@ export default function WithListHOC({ WrappedComponent, API_LINK, pageTitle, pag
     const [pageCount, setPageCount] = useState(1);
     const [blockSetItemsEffect, setBlockSetItemsEffect] = useState(false);
     const warehouseId = useParams().warehouseId;
+    const navigate = useNavigate();
     API_LINK = warehouseId ? API_LINK(warehouseId) : API_LINK;
 
     async function getItems() {
@@ -23,11 +24,16 @@ export default function WithListHOC({ WrappedComponent, API_LINK, pageTitle, pag
             }
         }).catch(err => console.log(err));
 
-        data = await response.json();
-
         if(response.status === 403 && data.error_message.includes("The Token has expired")){
             data = await refreshToken(getItems, null);
         }
+        else if(response.status === 401) {
+            
+            console.log("SIUSIAK");
+            navigate('/login');
+        }
+        
+        data = await response.json();
         
         return data;
     }
@@ -63,7 +69,7 @@ export default function WithListHOC({ WrappedComponent, API_LINK, pageTitle, pag
                     justifyContent="left"
                     direction="row">
 
-                    {items && items.map(item => <WrappedComponent {...item} setCartItems={setCartItems} addOrDelete={true} />)}
+                    {items && items.map(item => <WrappedComponent key={item.id} {...item} setCartItems={setCartItems} addOrDelete={true} />)}
                 </Grid >
                 <Grid item>
                     <PaginationComponent setCurrentPage={setCurrentPage} pageCount={pageCount} />
