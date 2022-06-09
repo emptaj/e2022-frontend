@@ -24,17 +24,15 @@ export default function WithListHOC({ WrappedComponent, API_LINK, pageTitle, pag
             }
         }).catch(err => console.log(err));
 
-        if(response.status === 403 && data.error_message.includes("The Token has expired")){
-            data = await refreshToken(getItems, null);
-        }
-        else if(response.status === 401) {
-            
-            console.log("SIUSIAK");
+        if(response.status === 401) {
             navigate('/login');
         }
         
         data = await response.json();
-        
+
+        if(response.status === 403 && data.error_message.includes("The Token has expired")){
+            data = await refreshToken(getItems, null);
+        }
         return data;
     }
 

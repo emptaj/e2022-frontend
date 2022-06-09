@@ -21,16 +21,18 @@ export default function OrderDetails( { id, addressId, state } ) {
             headers: {
                 'Authorization': localStorage.getItem('access_token')
             }
-            }).catch(err => console.log(err));
+        }).catch(err => console.log(err));
+
+        if(response.status === 401) {
+            navigate('/login');
+        }
 
         data = await response.json();
 
         if(response.status === 403 && data.error_message.includes("The Token has expired")){
             data = await refreshToken(getAddress, null);
         }
-        else if(response.status === 401) {
-            navigate('/login');
-        }
+        
         
         return data;
     }
