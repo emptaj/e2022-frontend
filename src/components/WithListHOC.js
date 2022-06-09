@@ -16,17 +16,21 @@ export default function WithListHOC({ WrappedComponent, API_LINK, pageTitle, pag
     API_LINK = warehouseId ? API_LINK(warehouseId) : API_LINK;
 
     async function getItems() {
-        let response = await fetch(`${API_LINK}?page=${currentPage - 1}&size=${pageSize}`, {
+        let response, data;
+        response = await fetch(`${API_LINK}?page=${currentPage - 1}&size=${pageSize}`, {
             headers: {
                 'Authorization': localStorage.getItem('access_token')
             }
-        }).
-            catch(err => console.log(err));
+        }).catch(err => console.log(err));
 
-        if(response.status === 401 && data.error_message.includes("The Token has expired"))
+        data = await response.json();
+
+        if(response.status === 401 && data.error_message.includes("The Token has expired")){
             response = refreshToken(getItems, null)
+            data = await response.json();
+        }
             
-        const data = await response.json();
+        
         return data;
     }
 
