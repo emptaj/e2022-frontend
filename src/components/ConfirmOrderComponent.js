@@ -29,28 +29,31 @@ export default function ConfirmOrderComponent( {cartItems, setCartItems, address
                     orderDetails: orderDetails
                     })
         }).catch(err => console.log(err));
+        
+        if(response.status === 401) {
+            navigate('/login');
+        }
+
 
         data = await response.json();
+
         if(response.status !== 201){
             setErrorMsg({
                 message: data.message,
                 deliveryTypeId: data.deliveryTypeId,
-                orderDetails: data.orderDetails,
-                address: data.address.postalcode
+                orderDetails: data.orderDetails
             });
         }
         else if(response.status === 403 && data.error_message.includes("The Token has expired")){
-            data = await refreshToken(createOrder, null);
-        }
-        else if(response.status === 401) {
-            navigate('/login');
+            response = await refreshToken(createOrder, null);
         }
 
-        return data;
+        return response;
     }
 
     const onSubmitButtonClick = () => {
-        createOrder().then(response => {
+        createOrder().then(response => {    
+            console.log(response.status)
             if(response.status !== 201)
                 return;
 
