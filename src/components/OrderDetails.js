@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Card, CardContent, Typography } from '@mui/material';
 import GridItem from "@mui/material/Grid";
@@ -31,9 +31,9 @@ export default function OrderDetails( { id, addressId, state } ) {
         return data;
     }
 
-    // useEffect(() => getAddress(), [])
-
-    getAddress().then(data => setAddress(data));
+    useEffect(() => {
+        getAddress().then(data => setAddress(data));
+    },[addressId])
 
     return (
         <GridItem md={4} xs={12}>

@@ -47,6 +47,7 @@ export default function WithListHOC({ WrappedComponent, API_LINK, pageTitle, pag
         });
     }, [])
 
+
     return (
         <div>
             <h1>{pageTitle}</h1>
