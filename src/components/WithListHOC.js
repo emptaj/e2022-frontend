@@ -5,6 +5,7 @@ import { Grid } from "@mui/material";
 
 import PaginationComponent from "./PaginationComponent";
 import { useParams } from "react-router-dom";
+import refreshToken from "../constants/RefreshToken";
 
 export default function WithListHOC({ WrappedComponent, API_LINK, pageTitle, pageSize, setCartItems }) {
     const [items, setItems] = useState([]);
@@ -15,12 +16,16 @@ export default function WithListHOC({ WrappedComponent, API_LINK, pageTitle, pag
     API_LINK = warehouseId ? API_LINK(warehouseId) : API_LINK;
 
     async function getItems() {
-        const response = await fetch(`${API_LINK}?page=${currentPage - 1}&size=${pageSize}`, {
+        let response = await fetch(`${API_LINK}?page=${currentPage - 1}&size=${pageSize}`, {
             headers: {
                 'Authorization': localStorage.getItem('access_token')
             }
         }).
             catch(err => console.log(err));
+
+        if(response.status === 401 && data.error_message.includes("The Token has expired"))
+            response = refreshToken(getItems, null)
+            
         const data = await response.json();
         return data;
     }

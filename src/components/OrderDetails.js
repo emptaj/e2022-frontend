@@ -5,6 +5,7 @@ import GridItem from "@mui/material/Grid";
 import CardActions from '@mui/material/CardActions';
 import { API_LINK_ADDRESS_ID } from '../constants/API_LINKS';
 import { DETAIL_CARD_STYLE } from '../constants/Styles';
+import refreshToken from '../constants/RefreshToken';
 
 
 export default function OrderDetails( { id, addressId, state } ) {
@@ -21,13 +22,17 @@ export default function OrderDetails( { id, addressId, state } ) {
             }).catch(err => console.log(err));
 
 
+        if(response.status === 401 && data.error_message.includes("The Token has expired"))
+            refreshToken(getAddress, null)
+
+
         const data = await response.json();
-        setAddress(data)
+        return data;
     }
 
     // useEffect(() => getAddress(), [])
 
-    getAddress();
+    getAddress().then(data => setAddress(data));
 
     return (
         <GridItem md={4} xs={12}>

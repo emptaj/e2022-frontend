@@ -8,7 +8,7 @@ export const STATIC_LINKS = {
     CREATE_ORDER: `${BASE_LINK}${API}/orders`,
     DELIVERY_TYPES: `${BASE_LINK}${API}/delivery-types`,
     LOGIN: `${BASE_LINK}/login`,
-    REFRESH_TOKEN: `${BASE_LINK}${API}/token/refresh`
+    REFRESH_TOKEN: `${BASE_LINK}/token/refresh`
 }
 
 export const API_LINK_WAREHOUSES_ID_PRODUCTS = warehouseId => `${BASE_LINK}${API}/warehouses/${warehouseId}/products`;
