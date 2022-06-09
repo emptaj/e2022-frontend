@@ -4,7 +4,6 @@ import * as React from 'react';
 import { useState } from "react";
 import { STATIC_LINKS } from '../constants/API_LINKS';
 import SignInForm from './SignInForm';
-import { STATIC_LINKS } from "../constants/API_LINKS"
 
 export default function SignInComponent() {
     const [signInData, setSignInData] = useState({ username: '', password: '' });
@@ -20,9 +19,8 @@ export default function SignInComponent() {
         }).catch(err => console.log(err));
 
         const data = await response.json();
-        console.log(data)
         localStorage.setItem('access_token', data.access_token);
-        localStorage.setItem('refresh_token', data.refreshtoken);
+        localStorage.setItem('refresh_token', data.refresh_token);
         localStorage.setItem('user_id', data.user_id);
     }
 
