@@ -1,7 +1,7 @@
 import { Box, TextField } from '@mui/material';
 import React from 'react';
 
-export default function CreateAddressComponent( {address, setAddress} ) { 
+export default function CreateAddressComponent( {address, setAddress, disableSubmtion} ) { 
     
     const handleChange = (event) => {
         const { value, name } = event.target;
@@ -25,6 +25,7 @@ export default function CreateAddressComponent( {address, setAddress} ) {
                 value={address.country}
                 onChange={event => handleChange(event)}
                 margin="normal"
+                disabled={disableSubmtion}
             />
             <TextField sx={{ width: '51%' }}
                 required
@@ -34,6 +35,7 @@ export default function CreateAddressComponent( {address, setAddress} ) {
                 value={address.city}
                 onChange={event => handleChange(event)}
                 margin="normal"
+                disabled={disableSubmtion}
             />
             <TextField sx={{ width: '51%' }}
                 required
@@ -43,6 +45,7 @@ export default function CreateAddressComponent( {address, setAddress} ) {
                 value={address.postalCode}
                 onChange={event => handleChange(event)}
                 margin="normal"
+                disabled={disableSubmtion}
             />
             <TextField sx={{ width: '51%' }}
                 required
@@ -52,6 +55,7 @@ export default function CreateAddressComponent( {address, setAddress} ) {
                 value={address.street}
                 onChange={event => handleChange(event)}
                 margin="normal"
+                disabled={disableSubmtion}
             />
             <TextField sx={{ width: '51%' }}
                 required
@@ -61,6 +65,7 @@ export default function CreateAddressComponent( {address, setAddress} ) {
                 value={address.houseNum}
                 onChange={event => handleChange(event)}
                 margin="normal"
+                disabled={disableSubmtion}
             />
             <TextField sx={{ width: '51%' }}
                 required
@@ -70,6 +75,7 @@ export default function CreateAddressComponent( {address, setAddress} ) {
                 value={address.flatNum}
                 onChange={event => handleChange(event)}
                 margin="normal"
+                disabled={disableSubmtion}
             />
             <TextField sx={{ width: '51%' }}
                 required
@@ -79,6 +85,7 @@ export default function CreateAddressComponent( {address, setAddress} ) {
                 value={address.phone}
                 onChange={event => handleChange(event)}
                 margin="normal"
+                disabled={disableSubmtion}
             />
         </Box>
     );

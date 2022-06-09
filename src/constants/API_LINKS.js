@@ -18,3 +18,5 @@ export const API_LINK_USERS_ORDERS = userId => `${BASE_LINK}${API}/users/${userI
 export const API_LINK_ORDER_ID = (orderId) => `${BASE_LINK}${API}/orders/${orderId}`;
 
 export const API_LINK_ADDRESS_ID = addressId => `${BASE_LINK}${API}/addresses/${addressId}`;
+
+export const API_LINK_PRODUCT_ID = productId => `${BASE_LINK}${API}/products/${productId}`;

@@ -14,7 +14,6 @@ export default function ConfirmOrderComponent( {cartItems, setCartItems, address
     async function createOrder() {
         const response = await fetch(STATIC_LINKS.CREATE_ORDER, {
             method: 'POST',
-            credentials: 'include',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',

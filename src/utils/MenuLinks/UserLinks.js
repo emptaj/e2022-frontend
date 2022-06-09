@@ -24,9 +24,9 @@ export default [{
     linkTo: '/warehouses'
 },
 {
-    text: 'Orders',
+    text: 'Shopping cart',
     icon: <LocalGroceryStoreIcon />,
-    linkTo: '/orders'
+    linkTo: '/shopping-cart'
 },
 {
     text: 'Log in',

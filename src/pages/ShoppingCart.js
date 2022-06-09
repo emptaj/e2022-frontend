@@ -15,11 +15,11 @@ const modalMessage = {
     navigate: "/"
 }
 
-export default function ShoppingCart( {cartItems, setCartItems} ) {
+export default function ShoppingCart( {cartItems, setCartItems, localStorageNames, disableSubmtion} ) {
     const [tableValue, setTableValue] = useState(0);
-    const [deliveryTypeId, setDeliveryTypeId] = useState(parseInt(localStorage.getItem('deliveryTypeId')));
+    const [deliveryTypeId, setDeliveryTypeId] = useState(parseInt(localStorage.getItem(localStorageNames.deliveryTypeId)));
     const [address, setAddress] = useState(() => {
-        const tempAddress = localStorage.getItem('address');
+        const tempAddress = localStorage.getItem(localStorageNames.address);
         return tempAddress? JSON.parse(tempAddress) : {};
     });
     const [isModalShown, setIsModalShown] = useState(false);
@@ -28,15 +28,15 @@ export default function ShoppingCart( {cartItems, setCartItems} ) {
         setTableValue(newValue);
     };
 
-    useEffect(() => localStorage.setItem('deliveryTypeId', deliveryTypeId), 
+    useEffect(() => localStorage.setItem(localStorageNames.deliveryTypeId, deliveryTypeId), 
     [deliveryTypeId])
 
-    useEffect(() => localStorage.setItem('address', JSON.stringify(address)), 
+    useEffect(() => localStorage.setItem(localStorageNames.address, JSON.stringify(address)), 
     [address])
 
     return (
         <div>
-            <h1> Place your order </h1>
+            <h1> {disableSubmtion? 'Your order' : 'Place your order'} </h1>
             <Box>
                 <Tabs
                     value={tableValue}
@@ -47,23 +47,23 @@ export default function ShoppingCart( {cartItems, setCartItems} ) {
                     <Tab label="1. Cart content" />
                     <Tab label="2. Delivery type" />
                     <Tab label="3. Address" />
-                    <Tab label="4. Confirm" />
+                    {disableSubmtion? '' : <Tab label="4. Confirm" />}
                 </Tabs>
             </Box>
             {(() => {
                 switch (tableValue+1) {
                     case 1: 
-                        return <ShoppingCartComponent cartItems={cartItems} setCartItems={setCartItems} />;
+                        return <ShoppingCartComponent cartItems={cartItems} setCartItems={setCartItems} disableSubmtion={disableSubmtion}/>;
                     case 2:
                         return (
                             <div> 
                                 <h1>Chosen delivery id: {deliveryTypeId? deliveryTypeId : 'None'}</h1> 
                                 <WithListHOC WrappedComponent={ChooseDeliveryTypeComponent} API_LINK={STATIC_LINKS.DELIVERY_TYPES} 
-                                    setCartItems={setDeliveryTypeId} />
+                                    setCartItems={disableSubmtion? () => null : setDeliveryTypeId} />
                             </ div>
                         )
                     case 3: 
-                        return <CreateAddressComponent address={address} setAddress={setAddress} />;
+                        return <CreateAddressComponent address={address} setAddress={setAddress} disableSubmtion={disableSubmtion} />;
                     case 4:
                         return <ConfirmOrderComponent cartItems={cartItems} setCartItems={setCartItems} address={address} 
                             deliveryTypeId={deliveryTypeId} setDeliveryTypeId={setDeliveryTypeId} setAddress={setAddress}
@@ -76,3 +76,10 @@ export default function ShoppingCart( {cartItems, setCartItems} ) {
         </div>
     );
 }
+
+ShoppingCart.defaultProps = { 
+    localStorageNames: {
+        deliveryTypeId: "presentDeliveryTypeId",
+        address: 'presentAddress'
+    }
+};
