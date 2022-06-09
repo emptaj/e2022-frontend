@@ -4,7 +4,7 @@ const API = "/api"
 export const STATIC_LINKS = {
     WAREHOUSES: `${BASE_LINK}${API}/warehouses`,
     PRODUCTS: `${BASE_LINK}${API}/products`,
-    REGISTER: `${BASE_LINK}${API}/users`,
+    REGISTER: `${BASE_LINK}${API}/users/`,
     CREATE_ORDER: `${BASE_LINK}${API}/orders`,
     DELIVERY_TYPES: `${BASE_LINK}${API}/delivery-types`,
     LOGIN: `${BASE_LINK}/login`,
