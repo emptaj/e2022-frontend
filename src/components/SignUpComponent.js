@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { STATIC_LINKS } from '../constants/API_LINKS';
 import SignUpForm from './SingUpForm';
 import ThankYouModal from './ThankYouModal';
 
@@ -23,7 +24,7 @@ export default function SignUpComponent() {
   const [isModalShown, setIsModalShown] = useState(false);
 
   async function registerUser() {
-    const response = await fetch('http://localhost:8080/api/users/', {
+    const response = await fetch(STATIC_LINKS.REGISTER, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',

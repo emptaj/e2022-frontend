@@ -7,11 +7,10 @@ import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
-function SignInForm({ formData, onChangeFunction, onSubmitFunction }) {
-    //W PRZYSZŁOŚCI TRZEBA BĘDZIE DODAĆ OBSŁUGĘ BŁĘDÓW Z LOGOWANIA: ERROR MESSAGES
+function SignInForm({ formData, onChangeFunction, onSubmitFunction, errorMsg }) {
 
     return (
-        <Box component="form" onSubmit={onSubmitFunction} noValidate sx={{ mt: 1 }}>
+        <Box component="form" onSubmit={onSubmitFunction} sx={{ mt: 1 }}>
             <TextField
                 autoFocus
                 required
@@ -21,8 +20,7 @@ function SignInForm({ formData, onChangeFunction, onSubmitFunction }) {
                 label="Username"
                 value={formData.username}
                 onChange={event => onChangeFunction(event)}
-                error={formData.username === ""}
-                helperText={formData.username === "" ? 'Empty field!' : ' '}
+                error={errorMsg}
                 margin="normal"
             />
             <TextField
@@ -34,8 +32,8 @@ function SignInForm({ formData, onChangeFunction, onSubmitFunction }) {
                 type="password"
                 value={formData.password}
                 onChange={event => onChangeFunction(event)}
-                error={formData.password === ""}
-                helperText={formData.password === "" ? 'Empty password!' : ' '}
+                error={errorMsg}
+                helperText={errorMsg? errorMsg : ' '}
                 margin="normal"
             />
             <FormControlLabel

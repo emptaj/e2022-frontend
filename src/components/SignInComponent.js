@@ -1,12 +1,11 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 
-
-import { useState } from "react";
 import { STATIC_LINKS } from '../constants/API_LINKS';
 import SignInForm from './SignInForm';
 
 export default function SignInComponent() {
     const [signInData, setSignInData] = useState({ username: '', password: '' });
+    const [errorMsg, setErrorMsg] = useState("");
 
     async function sendLogInData() {
         const response = await fetch(STATIC_LINKS.LOGIN, {
@@ -17,6 +16,9 @@ export default function SignInComponent() {
             },
             body: JSON.stringify(signInData)
         }).catch(err => console.log(err));
+
+        if(response.status === 401)
+            setErrorMsg("Invalid username or password!");
 
         const data = await response.json();
         localStorage.setItem('access_token', data.access_token);
@@ -39,10 +41,9 @@ export default function SignInComponent() {
         })
     }
 
-    return ( <
-        SignInForm formData = { signInData }
-        onChangeFunction = { handleChange }
-        onSubmitFunction = { handleSubmit }
+    return ( 
+        <SignInForm formData = { signInData } onChangeFunction = { handleChange } 
+            onSubmitFunction = { handleSubmit } errorMsg={errorMsg}
         />
     )
 }
