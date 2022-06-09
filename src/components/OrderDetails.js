@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button, Card, CardContent, Typography } from '@mui/material';
 import GridItem from "@mui/material/Grid";
 import CardActions from '@mui/material/CardActions';
@@ -11,6 +11,7 @@ import refreshToken from '../constants/RefreshToken';
 export default function OrderDetails( { id, addressId, state } ) {
     const API_LINK= API_LINK_ADDRESS_ID(addressId);
     const [address, setAddress] = useState({});
+    const navigate = useNavigate();
 
     const cardStyle = DETAIL_CARD_STYLE;
 
@@ -27,13 +28,16 @@ export default function OrderDetails( { id, addressId, state } ) {
         if(response.status === 403 && data.error_message.includes("The Token has expired")){
             data = await refreshToken(getAddress, null);
         }
+        else if(response.status === 401) {
+            navigate('/login');
+        }
         
         return data;
     }
 
-    // useEffect(() => getAddress(), [])
-
-    getAddress().then(data => setAddress(data));
+    useEffect(() => {
+        getAddress().then(data => setAddress(data));
+    },[addressId])
 
     return (
         <GridItem md={4} xs={12}>

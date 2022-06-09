@@ -1,11 +1,13 @@
 import { Alert, Button } from '@mui/material';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { STATIC_LINKS } from '../constants/API_LINKS';
 import refreshToken from '../constants/RefreshToken';
 
 export default function ConfirmOrderComponent( {cartItems, setCartItems, address, setAddress, deliveryTypeId, setDeliveryTypeId, setIsModalShown} ) {
     const [errorMsg, setErrorMsg] = useState({});
     const orderDetails = [];
+    const navigate = useNavigate();
 
     cartItems.forEach(cartItem => orderDetails.push({
         productId: JSON.parse(cartItem.item).id,
@@ -39,6 +41,9 @@ export default function ConfirmOrderComponent( {cartItems, setCartItems, address
         }
         else if(response.status === 403 && data.error_message.includes("The Token has expired")){
             data = await refreshToken(createOrder, null);
+        }
+        else if(response.status === 401) {
+            navigate('/login');
         }
 
         return data;

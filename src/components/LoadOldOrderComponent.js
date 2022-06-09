@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { API_LINK_ADDRESS_ID, API_LINK_ORDER_ID, API_LINK_PRODUCT_ID } from "../constants/API_LINKS";
 import refreshToken from "../constants/RefreshToken";
 import ShoppingCart from "../pages/ShoppingCart";
@@ -9,25 +9,29 @@ const localStorageNames = {
     address: 'pastAddress'
 }
 
-async function getFromServer(link) {
-    let response, data;
-    response = await fetch(link, {
-        headers: {
-            'Authorization': localStorage.getItem('access_token')
-        }
-    }).catch(err => console.log(err));
-    data = await response.json();
-
-    if(response.status === 403 && data.error_message.includes("The Token has expired")){
-        data = await refreshToken(getFromServer, link);
-    }
-
-    return data;
-}
-
 export default function LoadOldOrderComponent() {
+    const navigate = useNavigate();
     const [orderDetails, setOrderDetails] = useState([]);
     const API_ORDER_LINK = API_LINK_ORDER_ID(useParams().id);
+
+    async function getFromServer(link) {
+        let response, data;
+        response = await fetch(link, {
+            headers: {
+                'Authorization': localStorage.getItem('access_token')
+            }
+        }).catch(err => console.log(err));
+        data = await response.json();
+    
+        if(response.status === 403 && data.error_message.includes("The Token has expired")){
+            data = await refreshToken(getFromServer, link);
+        }
+        else if(response.status === 401) {
+            navigate('/login');
+        }
+    
+        return data;
+    }
 
     useEffect(() => {
         getFromServer(API_ORDER_LINK).then(dataOrder => {
