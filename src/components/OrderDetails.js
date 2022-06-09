@@ -24,9 +24,8 @@ export default function OrderDetails( { id, addressId, state } ) {
 
         data = await response.json();
 
-        if(response.status === 401 && data.error_message.includes("The Token has expired")){
-            response = await refreshToken(getAddress, null);
-            data = await response.json();
+        if(response.status === 403 && data.error_message.includes("The Token has expired")){
+            data = await refreshToken(getAddress, null);
         }
         
         return data;
