@@ -13,6 +13,8 @@ import SignIn from "./pages/SignIn";
 import Warehouses from "./pages/Warehouses";
 import { STATIC_LINKS, API_LINK_WAREHOUSES_ID_PRODUCTS } from "./constants/API_LINKS";
 import ShoppingCart from "./pages/ShoppingCart";
+import UsersOrders from "./pages/UsersOrders";
+import LoadOldOrderComponent from "./components/LoadOldOrderComponent";
 
 function App() {
     const [cartItems, setCartItems] = useState(() => {
@@ -37,7 +39,9 @@ function App() {
                         <Route path="/products" element={<Products API_LINK={STATIC_LINKS.PRODUCTS} setCartItems={setCartItems}/>} />
                         <Route path="/warehouses" element={<Warehouses API_LINK={STATIC_LINKS.WAREHOUSES} />} />
                         <Route path="/warehouses/:warehouseId/products" element={<Products API_LINK={API_LINK_WAREHOUSES_ID_PRODUCTS} setCartItems={setCartItems}/>} />
-                        <Route path="/orders" element={<ShoppingCart cartItems={cartItems} setCartItems={setCartItems} />} />
+                        <Route path="/shopping-cart" element={<ShoppingCart cartItems={cartItems} setCartItems={setCartItems} />} />
+                        <Route path="/profile" element={<UsersOrders  /> } />
+                        <Route path="/orders/:id" element={<LoadOldOrderComponent />} />
                         <Route path="*" element={<Error />} />
                     </Routes>
                 </Grid>

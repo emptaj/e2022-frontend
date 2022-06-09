@@ -2,6 +2,7 @@ import * as React from 'react';
 
 
 import { useState } from "react";
+import { STATIC_LINKS } from '../constants/API_LINKS';
 import SignInForm from './SignInForm';
 import { STATIC_LINKS } from "../constants/API_LINKS"
 
@@ -18,9 +19,11 @@ export default function SignInComponent() {
             body: JSON.stringify(signInData)
         }).catch(err => console.log(err));
 
-        console.log(response);
-        const data = await response.json;
-        console.log(data);
+        const data = await response.json();
+        console.log(data)
+        localStorage.setItem('access_token', data.access_token);
+        localStorage.setItem('refresh_token', data.refreshtoken);
+        localStorage.setItem('user_id', data.user_id);
     }
 
     const handleSubmit = (event) => {

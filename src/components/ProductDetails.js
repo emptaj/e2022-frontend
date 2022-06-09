@@ -9,7 +9,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import { DETAIL_CARD_STYLE } from "../constants/Styles";
 
-const ProductDetails = ({ id, name, description, price, setCartItems, addOrDelete }) => {
+const ProductDetails = ({ id, name, description, price, setCartItems, addOrDelete, disableSubmtion }) => {
 
     const cardStyle = DETAIL_CARD_STYLE;
 
@@ -18,7 +18,7 @@ const ProductDetails = ({ id, name, description, price, setCartItems, addOrDelet
         name: name,
         description: description,
         price: price
-    }
+    } 
 
     function addToCart() {
         setCartItems(listOfItems => {
@@ -62,10 +62,11 @@ const ProductDetails = ({ id, name, description, price, setCartItems, addOrDelet
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button size="small">Jakiś link</Button>
-                    <Button size="small" onClick={addOrDelete? addToCart : removeFromCart}> 
-                        {addOrDelete? <AddShoppingCartIcon color="success" /> : <RemoveShoppingCartIcon color="error" />}
-                    </Button>
+                    {disableSubmtion? '' :
+                        <Button size="small" onClick={addOrDelete? addToCart : removeFromCart}> 
+                            {addOrDelete? <AddShoppingCartIcon color="success" /> : <RemoveShoppingCartIcon color="error" />}
+                        </Button>
+                    }
                 </CardActions>
             </Card>
         </GridItem >
