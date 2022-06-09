@@ -55,7 +55,7 @@ export default function SignUpComponent() {
   }
 
   useEffect(() => {
-    if(!errorMsg.useEffect || errorMsg.username || errorMsg.email | errorMsg.password)
+    if(!errorMsg.useEffect || errorMsg.username || errorMsg.email || errorMsg.password)
       return;
     registerUser();
   }, [errorMsg]);
