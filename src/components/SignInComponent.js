@@ -4,11 +4,12 @@ import * as React from 'react';
 import { useState } from "react";
 import { STATIC_LINKS } from '../constants/API_LINKS';
 import SignInForm from './SignInForm';
+import { STATIC_LINKS } from "../constants/API_LINKS"
 
 export default function SignInComponent() {
     const [signInData, setSignInData] = useState({ username: '', password: '' });
 
-    async function sendLogInData () {
+    async function sendLogInData() {
         const response = await fetch(STATIC_LINKS.LOGIN, {
             method: 'POST',
             headers: {
@@ -40,7 +41,10 @@ export default function SignInComponent() {
         })
     }
 
-    return (
-        <SignInForm formData={signInData} onChangeFunction={handleChange} onSubmitFunction={handleSubmit} />
+    return ( <
+        SignInForm formData = { signInData }
+        onChangeFunction = { handleChange }
+        onSubmitFunction = { handleSubmit }
+        />
     )
 }
