@@ -10,15 +10,18 @@ const localStorageNames = {
 }
 
 async function getFromServer(link) {
-    const response = await fetch(link, {
+    let response, data;
+    response = await fetch(link, {
         headers: {
             'Authorization': localStorage.getItem('access_token')
         }
     }).catch(err => console.log(err));
-    const data = await response.json();
+    data = await response.json();
 
-    if(response.status === 401 && data.error_message.includes("The Token has expired"))
-        refreshToken(getFromServer, link)
+    if(response.status === 401 && data.error_message.includes("The Token has expired")){
+        response = await refreshToken(getFromServer, link)
+        data = await response.json();
+    }
 
     return data;
 }

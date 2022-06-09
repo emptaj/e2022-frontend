@@ -15,18 +15,20 @@ export default function OrderDetails( { id, addressId, state } ) {
     const cardStyle = DETAIL_CARD_STYLE;
 
     async function getAddress() {
-        const response = await fetch(API_LINK, {
+        let response, data;
+        response = await fetch(API_LINK, {
             headers: {
                 'Authorization': localStorage.getItem('access_token')
             }
             }).catch(err => console.log(err));
 
+        data = await response.json();
 
-        if(response.status === 401 && data.error_message.includes("The Token has expired"))
-            refreshToken(getAddress, null)
-
-
-        const data = await response.json();
+        if(response.status === 401 && data.error_message.includes("The Token has expired")){
+            response = await refreshToken(getAddress, null);
+            data = await response.json();
+        }
+        
         return data;
     }
 

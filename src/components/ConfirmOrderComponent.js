@@ -13,7 +13,8 @@ export default function ConfirmOrderComponent( {cartItems, setCartItems, address
     }))
 
     async function createOrder() {
-        let response = await fetch(STATIC_LINKS.CREATE_ORDER, {
+        let response, data;
+        response = await fetch(STATIC_LINKS.CREATE_ORDER, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -27,7 +28,7 @@ export default function ConfirmOrderComponent( {cartItems, setCartItems, address
                     })
         }).catch(err => console.log(err));
 
-        const data = await response.json();
+        data = await response.json();
         if(response.status !== 201){
             setErrorMsg({
                 message: data.message,
@@ -36,8 +37,10 @@ export default function ConfirmOrderComponent( {cartItems, setCartItems, address
                 address: data.address.postalcode
             });
             
-            if(data.error_message.includes("The Token has expired"))
-                response = refreshToken(createOrder, null)
+            if(data.error_message.includes("The Token has expired")){
+                response = await refreshToken(createOrder, null);
+                data = await response.json();
+            }
         }
 
         return data;
