@@ -36,12 +36,20 @@ export default function ConfirmOrderComponent( {cartItems, setCartItems, address
 
 
         data = await response.json();
-
+        
         if(response.status !== 201){
             setErrorMsg({
                 message: data.message,
                 deliveryTypeId: data.deliveryTypeId,
                 orderDetails: data.orderDetails
+            });
+            Object.keys(data).forEach((error) =>{
+                setErrorMsg((prevErrors) => {
+                    return{
+                        ...prevErrors,
+                        [error.split('.')[1]]: data[error]
+                    }      
+                });
             });
         }
         else if(response.status === 403 && data.error_message.includes("The Token has expired")){
@@ -53,7 +61,6 @@ export default function ConfirmOrderComponent( {cartItems, setCartItems, address
 
     const onSubmitButtonClick = () => {
         createOrder().then(response => {    
-            console.log(response.status)
             if(response.status !== 201)
                 return;
 
@@ -84,27 +91,27 @@ export default function ConfirmOrderComponent( {cartItems, setCartItems, address
                 { errorMsg.orderDetails }
             </Alert>}
 
-            {/* {errorMsg.address.postalCode && <Alert severity="error">
-                { errorMsg.orderDetails }
-            </Alert>} */}
-            {/* {errorMsg.orderDetails && <Alert severity="error">
-                { errorMsg.orderDetails }
+            {errorMsg.country && <Alert severity="error">
+                { errorMsg.country }
             </Alert>}
-            {errorMsg.orderDetails && <Alert severity="error">
-                { errorMsg.orderDetails }
+            {errorMsg.city && <Alert severity="error">
+                { errorMsg.city }
             </Alert>}
-            {errorMsg.orderDetails && <Alert severity="error">
-                { errorMsg.orderDetails }
+            {errorMsg.postalCode && <Alert severity="error">
+                { errorMsg.postalCode }
             </Alert>}
-            {errorMsg.orderDetails && <Alert severity="error">
-                { errorMsg.orderDetails }
+            {errorMsg.street && <Alert severity="error">
+                { errorMsg.street }
             </Alert>}
-            {errorMsg.orderDetails && <Alert severity="error">
-                { errorMsg.orderDetails }
+            {errorMsg.houseNum && <Alert severity="error">
+                { errorMsg.houseNum }
             </Alert>}
-            {errorMsg.orderDetails && <Alert severity="error">
-                { errorMsg.orderDetails }
-            </Alert>} */}
+            {errorMsg.flatNum && <Alert severity="error">
+                { errorMsg.flatNum }
+            </Alert>}
+            {errorMsg.phone && <Alert severity="error">
+                { errorMsg.phone }
+            </Alert>}
             
         </div>
     )
