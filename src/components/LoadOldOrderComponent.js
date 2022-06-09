@@ -18,9 +18,8 @@ async function getFromServer(link) {
     }).catch(err => console.log(err));
     data = await response.json();
 
-    if(response.status === 401 && data.error_message.includes("The Token has expired")){
-        response = await refreshToken(getFromServer, link)
-        data = await response.json();
+    if(response.status === 403 && data.error_message.includes("The Token has expired")){
+        data = await refreshToken(getFromServer, link);
     }
 
     return data;

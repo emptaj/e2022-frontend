@@ -25,11 +25,9 @@ export default function WithListHOC({ WrappedComponent, API_LINK, pageTitle, pag
 
         data = await response.json();
 
-        if(response.status === 401 && data.error_message.includes("The Token has expired")){
-            response = refreshToken(getItems, null)
-            data = await response.json();
+        if(response.status === 403 && data.error_message.includes("The Token has expired")){
+            data = await refreshToken(getItems, null);
         }
-            
         
         return data;
     }

@@ -36,11 +36,9 @@ export default function ConfirmOrderComponent( {cartItems, setCartItems, address
                 orderDetails: data.orderDetails,
                 address: data.address.postalcode
             });
-            
-            if(data.error_message.includes("The Token has expired")){
-                response = await refreshToken(createOrder, null);
-                data = await response.json();
-            }
+        }
+        else if(response.status === 403 && data.error_message.includes("The Token has expired")){
+            data = await refreshToken(createOrder, null);
         }
 
         return data;
