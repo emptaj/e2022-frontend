@@ -5,7 +5,7 @@ import refreshToken from "../constants/RefreshToken";
 import ShoppingCart from "../pages/ShoppingCart";
 
 const localStorageNames = {
-    deliveryTypeId: "pastDeliveryTypeId",
+    deliveryTypeId: "pastDeliveryType",
     address: 'pastAddress'
 }
 

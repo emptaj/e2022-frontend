@@ -17,7 +17,10 @@ const modalMessage = {
 
 export default function ShoppingCart( {cartItems, setCartItems, localStorageNames, disableSubmtion} ) {
     const [tableValue, setTableValue] = useState(0);
-    const [deliveryTypeId, setDeliveryTypeId] = useState(parseInt(localStorage.getItem(localStorageNames.deliveryTypeId)));
+    const [deliveryType, setDeliveryType] = useState(() => {
+        const tempDelieveryType = localStorage.getItem(localStorageNames.deliveryType);
+        return tempDelieveryType? JSON.parse(tempDelieveryType) : {};
+    });
     const [address, setAddress] = useState(() => {
         const tempAddress = localStorage.getItem(localStorageNames.address);
         return tempAddress? JSON.parse(tempAddress) : {};
@@ -28,8 +31,8 @@ export default function ShoppingCart( {cartItems, setCartItems, localStorageName
         setTableValue(newValue);
     };
 
-    useEffect(() => localStorage.setItem(localStorageNames.deliveryTypeId, deliveryTypeId), 
-    [deliveryTypeId])
+    useEffect(() => localStorage.setItem(localStorageNames.deliveryType, JSON.stringify(deliveryType)), 
+    [deliveryType])
 
     useEffect(() => localStorage.setItem(localStorageNames.address, JSON.stringify(address)), 
     [address])
@@ -57,16 +60,16 @@ export default function ShoppingCart( {cartItems, setCartItems, localStorageName
                     case 2:
                         return (
                             <div> 
-                                <h1>Chosen delivery id: {deliveryTypeId? deliveryTypeId : 'None'}</h1> 
+                                <h1>Chosen delivery id: {deliveryType? deliveryType.name : 'None'}</h1> 
                                 <WithListHOC WrappedComponent={ChooseDeliveryTypeComponent} API_LINK={STATIC_LINKS.DELIVERY_TYPES} 
-                                    setCartItems={disableSubmtion? () => null : setDeliveryTypeId} />
+                                    setCartItems={disableSubmtion? () => null : setDeliveryType} />
                             </ div>
                         )
                     case 3: 
                         return <CreateAddressComponent address={address} setAddress={setAddress} disableSubmtion={disableSubmtion} />;
                     case 4:
                         return <ConfirmOrderComponent cartItems={cartItems} setCartItems={setCartItems} address={address} 
-                            deliveryTypeId={deliveryTypeId} setDeliveryTypeId={setDeliveryTypeId} setAddress={setAddress}
+                            deliveryType={deliveryType} setDeliveryType={setDeliveryType} setAddress={setAddress}
                             setIsModalShown={setIsModalShown} />;
                     default:
                         return {};
@@ -79,7 +82,7 @@ export default function ShoppingCart( {cartItems, setCartItems, localStorageName
 
 ShoppingCart.defaultProps = { 
     localStorageNames: {
-        deliveryTypeId: "presentDeliveryTypeId",
+        deliveryTypeId: "presentDeliveryType",
         address: 'presentAddress'
     }
 };
