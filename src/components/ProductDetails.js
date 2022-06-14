@@ -2,14 +2,17 @@ import React from "react";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
+import { CardMedia, CardActionArea } from '@mui/material';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import GridItem from "@mui/material/Grid";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
-import { DETAIL_CARD_STYLE } from "../constants/Styles";
+import { DETAIL_CARD_STYLE, CustomCardMedia, CustomDiv, CustomDiv2 } from "../constants/Styles";
 
-const ProductDetails = ({ id, name, description, price, setCartItems, addOrDelete, disableSubmtion }) => {
+import { useStyles } from "react"
+
+const ProductDetails = ({ id, name, description, price, imageURL, setCartItems, addOrDelete, disableSubmtion }) => {
 
     const cardStyle = DETAIL_CARD_STYLE;
 
@@ -17,31 +20,32 @@ const ProductDetails = ({ id, name, description, price, setCartItems, addOrDelet
         id: id,
         name: name,
         description: description,
-        price: price
-    } 
+        price: price,
+        imageURL: imageURL
+    }
 
     function addToCart() {
         setCartItems(listOfItems => {
             const itemStringified = JSON.stringify(itemFromProps);
             const index = listOfItems.findIndex((checkedItem) => checkedItem.item === itemStringified);
 
-            if(index === -1)
-                return [...listOfItems, {item: itemStringified, quantity: 1}];
+            if (index === -1)
+                return [...listOfItems, { item: itemStringified, quantity: 1 }];
 
             listOfItems[index].quantity += 1;
             return [...listOfItems];
         })
     }
-    
+
     function removeFromCart() {
         setCartItems(listOfItems => {
             const itemStringified = JSON.stringify(itemFromProps);
             const index = listOfItems.findIndex((checkedItem) => checkedItem.item === itemStringified);
-            
-            if(listOfItems[index].quantity === 1)
+
+            if (listOfItems[index].quantity === 1)
                 listOfItems.splice(index, 1);
             else
-                listOfItems[index].quantity -= 1; 
+                listOfItems[index].quantity -= 1;
 
             return [...listOfItems];
         })
@@ -50,6 +54,15 @@ const ProductDetails = ({ id, name, description, price, setCartItems, addOrDelet
     return (
         <GridItem md={4} xs={12}>
             <Card style={cardStyle}>
+                <CardActionArea>
+                    <CustomDiv2 imgURL={imageURL}></CustomDiv2>
+                    {/* <CustomCardMedia
+                        title={name}
+                        image={imageURL}
+                        component="img"
+                    // className={DETAIL_CARD_IMAGE_STYLE}
+                    /> */}
+                </CardActionArea>
                 <CardContent>
                     <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                         {name}
@@ -62,9 +75,9 @@ const ProductDetails = ({ id, name, description, price, setCartItems, addOrDelet
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    {disableSubmtion? '' :
-                        <Button size="small" onClick={addOrDelete? addToCart : removeFromCart}> 
-                            {addOrDelete? <AddShoppingCartIcon color="success" /> : <RemoveShoppingCartIcon color="error" />}
+                    {disableSubmtion ? '' :
+                        <Button size="small" onClick={addOrDelete ? addToCart : removeFromCart}>
+                            {addOrDelete ? <AddShoppingCartIcon color="success" /> : <RemoveShoppingCartIcon color="error" />}
                         </Button>
                     }
                 </CardActions>
