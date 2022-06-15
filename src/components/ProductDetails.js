@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -8,12 +8,13 @@ import Typography from '@mui/material/Typography';
 import GridItem from "@mui/material/Grid";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
-import { DETAIL_CARD_STYLE, CustomCardMedia, CustomDiv, CustomDiv2 } from "../constants/Styles";
+import { DETAIL_CARD_STYLE } from "../constants/Styles";
+import ProductImageModal from "./ProductImageModal";
 
-import { useStyles } from "react"
 
 const ProductDetails = ({ id, name, description, price, imageURL, setCartItems, addOrDelete, disableSubmtion }) => {
 
+    const [isModalShown, setIsModalShown] = useState(false);
     const cardStyle = DETAIL_CARD_STYLE;
 
     const itemFromProps = {
@@ -55,22 +56,22 @@ const ProductDetails = ({ id, name, description, price, imageURL, setCartItems, 
         <GridItem md={4} xs={12}>
             <Card style={cardStyle}>
                 <CardActionArea>
-                    <CustomDiv2 imgURL={imageURL}></CustomDiv2>
-                    {/* <CustomCardMedia
+                    <CardMedia
                         title={name}
                         image={imageURL}
                         component="img"
-                    // className={DETAIL_CARD_IMAGE_STYLE}
-                    /> */}
+                        height="120"
+                        onClick={() => setIsModalShown(true)}
+                    />
                 </CardActionArea>
                 <CardContent>
-                    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                    <Typography variant="h6">
                         {name}
                     </Typography>
                     <Typography variant="h5" component="div">
                         {price}
                     </Typography>
-                    <Typography variant="body2">
+                    <Typography sx={{ fontSize: 12 }} color="text.secondary">
                         {description}
                     </Typography>
                 </CardContent>
@@ -82,6 +83,7 @@ const ProductDetails = ({ id, name, description, price, imageURL, setCartItems, 
                     }
                 </CardActions>
             </Card>
+            <ProductImageModal setIsModalShown={setIsModalShown} isModalShown={isModalShown} imageSource={imageURL}/>
         </GridItem >
 
 
