@@ -60,7 +60,7 @@ export default function ShoppingCart( {cartItems, setCartItems, localStorageName
                     case 2:
                         return (
                             <div> 
-                                <h1>Chosen delivery id: {deliveryType? deliveryType.name : 'None'}</h1> 
+                                <h1>Chosen delivery type: {deliveryType? deliveryType.name : 'None'}</h1> 
                                 <WithListHOC WrappedComponent={ChooseDeliveryTypeComponent} API_LINK={STATIC_LINKS.DELIVERY_TYPES} 
                                     setCartItems={disableSubmtion? () => null : setDeliveryType} />
                             </ div>
@@ -82,7 +82,7 @@ export default function ShoppingCart( {cartItems, setCartItems, localStorageName
 
 ShoppingCart.defaultProps = { 
     localStorageNames: {
-        deliveryTypeId: "presentDeliveryType",
+        deliveryType: "presentDeliveryType",
         address: 'presentAddress'
     }
 };

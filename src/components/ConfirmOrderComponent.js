@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { STATIC_LINKS } from '../constants/API_LINKS';
 import refreshToken from '../constants/RefreshToken';
 
-export default function ConfirmOrderComponent( {cartItems, setCartItems, address, setAddress, deliveryTypeId, setDeliveryTypeId, setIsModalShown} ) {
+export default function ConfirmOrderComponent( {cartItems, setCartItems, address, setAddress, deliveryType, setDeliveryType, setIsModalShown} ) {
     const [errorMsg, setErrorMsg] = useState({});
     const orderDetails = [];
     const navigate = useNavigate();
@@ -25,7 +25,7 @@ export default function ConfirmOrderComponent( {cartItems, setCartItems, address
             },
             body:JSON.stringify({
                     address: address,
-                    deliveryTypeId: deliveryTypeId,
+                    deliveryTypeId: deliveryType.id,
                     orderDetails: orderDetails
                     })
         }).catch(err => console.log(err));
@@ -66,7 +66,7 @@ export default function ConfirmOrderComponent( {cartItems, setCartItems, address
 
             setCartItems([]);
             setAddress({});
-            setDeliveryTypeId(null);
+            setDeliveryType({});
             setIsModalShown(true);
         });
     }
