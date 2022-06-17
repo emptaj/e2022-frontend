@@ -58,8 +58,12 @@ export default function ConfirmOrderComponent ({ cartItems, setCartItems, addres
                     });
                 })
             };
+
         }
 
+        else {
+            window.open(data[0].payuRedirectURL, '_blank')
+        }
 
         return response;
     }
