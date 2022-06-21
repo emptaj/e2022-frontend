@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { STATIC_LINKS } from '../constants/API_LINKS';
 import refreshToken from '../constants/RefreshToken';
 
-export default function ConfirmOrderComponent ({ cartItems, setCartItems, address, setAddress, deliveryType, setDeliveryType, setIsModalShown }) {
+export default function ConfirmOrderComponent ({ cartItems, setCartItems, address, setAddress, deliveryType, setDeliveryType, setIsModalShown, payuRedirectURL }) {
     const [errorMsg, setErrorMsg] = useState({});
     const orderDetails = [];
     const navigate = useNavigate();
@@ -62,7 +62,7 @@ export default function ConfirmOrderComponent ({ cartItems, setCartItems, addres
         }
 
         else {
-            window.open(data[0].payuRedirectURL, '_blank')
+            data.forEach(miniOrder => window.open(miniOrder.payuRedirectURL));
         }
 
         return response;
@@ -81,15 +81,19 @@ export default function ConfirmOrderComponent ({ cartItems, setCartItems, addres
         });
     }
 
+    const redirectToOldPayment = () => {
+        window.open(payuRedirectURL, '_blank');
+    }
+
     return (
         <div>
             <Button
                 type="submit"
                 variant="contained"
-                onClick={onSubmitButtonClick}
+                onClick={payuRedirectURL? redirectToOldPayment : onSubmitButtonClick}
                 sx={{ mt: 3, mb: 2 }}
             >
-                Confirm your order
+                {payuRedirectURL ? 'Check payment' : 'Confirm your order'  }
             </Button>
             {errorMsg.message && <Alert severity="error">
                 {errorMsg.message}

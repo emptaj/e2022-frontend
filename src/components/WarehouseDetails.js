@@ -20,11 +20,8 @@ const WarehouseDetails = ({ id, name, addressId, active }) => {
         <GridItem md={4} xs={12}>
             <Card style={cardStyle}>
                 <CardContent>
-                    <Typography sx={{ fontSize: 14 }} color="secondary" gutterBottom>
+                    <Typography variant="h5" color="secondary" gutterBottom>
                         {name}
-                    </Typography>
-                    <Typography variant="h5" component="div">
-                        {addressId}
                     </Typography>
                     <Typography variant="body2" color= {active? "success.main" : "error.main"}> 
                         {isActive}

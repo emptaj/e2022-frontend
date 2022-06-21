@@ -60,7 +60,7 @@ const ProductDetails = ({ id, name, description, price, imageURL, setCartItems, 
                         title={name}
                         image={imageURL}
                         component="img"
-                        height="120"
+                        height="85"
                         onClick={() => setIsModalShown(true)}
                     />
                 </CardActionArea>

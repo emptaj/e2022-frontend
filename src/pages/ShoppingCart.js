@@ -32,6 +32,8 @@ export default function ShoppingCart ({ cartItems, setCartItems, localStorageNam
         setTableValue(newValue);
     };
 
+    const payuRedirectURL = localStorage.getItem('payuRedirectURL');
+
     useEffect(() => localStorage.setItem(localStorageNames.deliveryType, JSON.stringify(deliveryType)),
         [deliveryType])
 
@@ -51,7 +53,7 @@ export default function ShoppingCart ({ cartItems, setCartItems, localStorageNam
                     <Tab label="1. Cart content" />
                     <Tab label="2. Delivery type" />
                     <Tab label="3. Address" />
-                    {disableSubmtion ? '' : <Tab label="4. Confirm" />}
+                    {disableSubmtion ? <Tab label='4. Pay for previous order' /> : <Tab label="4. Confirm" />}
                 </Tabs>
             </Box>
             {(() => {
@@ -71,7 +73,7 @@ export default function ShoppingCart ({ cartItems, setCartItems, localStorageNam
                     case 4:
                         return <ConfirmOrderComponent cartItems={cartItems} setCartItems={setCartItems} address={address}
                             deliveryType={deliveryType} setDeliveryType={setDeliveryType} setAddress={setAddress}
-                            setIsModalShown={setIsModalShown} />;
+                            setIsModalShown={setIsModalShown} payuRedirectURL={disableSubmtion? payuRedirectURL : null}/>;
                     default:
                         return {};
                 }
