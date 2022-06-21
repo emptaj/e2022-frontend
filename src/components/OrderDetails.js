@@ -8,7 +8,7 @@ import { DETAIL_CARD_STYLE } from '../constants/Styles';
 import refreshToken from '../constants/RefreshToken';
 
 
-export default function OrderDetails ({ id, addressId, state }) {
+export default function OrderDetails ({ id, addressId, state, payuRedirectURL }) {
     const API_LINK = API_LINK_ADDRESS_ID(addressId);
     const [address, setAddress] = useState({});
     const navigate = useNavigate();
@@ -53,6 +53,11 @@ export default function OrderDetails ({ id, addressId, state }) {
         refreshState()
         getAddress().then(data => setAddress(data));
     }, [addressId])
+
+    useEffect(() => {
+        if(payuRedirectURL)
+            localStorage.setItem('payuRedirectURL', payuRedirectURL);
+    }, [])
 
     return (
         <GridItem md={4} xs={12}>
