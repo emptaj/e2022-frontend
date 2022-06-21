@@ -10,5 +10,5 @@
 6. Serwer pocztowy uruchamiamy komendą ```maildev```
 
 
-**UWAGA! Kroki 1-3 należy wykonać tylko raz, podczas pierwszego uruchomienia aplikacji.**
+**UWAGA! Kroki 1-3 należy wykonać tylko raz, podczas pierwszego uruchomienia aplikacji.**\
 **UWAGA! Kroki 4,6 należy wykonać podczas każdego uruchomienia aplikacji.**
