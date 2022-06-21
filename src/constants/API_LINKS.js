@@ -20,3 +20,5 @@ export const API_LINK_ORDER_ID = (orderId) => `${BASE_LINK}${API}/orders/${order
 export const API_LINK_ADDRESS_ID = addressId => `${BASE_LINK}${API}/addresses/${addressId}`;
 
 export const API_LINK_PRODUCT_ID = productId => `${BASE_LINK}${API}/products/${productId}`;
+
+export const API_LINK_REFRESH_ORDER_STATUS = orderId => `${BASE_LINK}${API}/orders/${orderId}/refresh-status`

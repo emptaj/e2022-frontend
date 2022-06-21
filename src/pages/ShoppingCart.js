@@ -15,15 +15,16 @@ const modalMessage = {
     navigate: "/"
 }
 
-export default function ShoppingCart( {cartItems, setCartItems, localStorageNames, disableSubmtion} ) {
+export default function ShoppingCart ({ cartItems, setCartItems, localStorageNames, disableSubmtion }) {
     const [tableValue, setTableValue] = useState(0);
     const [deliveryType, setDeliveryType] = useState(() => {
         const tempDelieveryType = localStorage.getItem(localStorageNames.deliveryType);
-        return tempDelieveryType? JSON.parse(tempDelieveryType) : {};
+        return tempDelieveryType ? JSON.parse(tempDelieveryType) : {};
     });
+
     const [address, setAddress] = useState(() => {
         const tempAddress = localStorage.getItem(localStorageNames.address);
-        return tempAddress? JSON.parse(tempAddress) : {};
+        return tempAddress ? JSON.parse(tempAddress) : {};
     });
     const [isModalShown, setIsModalShown] = useState(false);
 
@@ -31,15 +32,17 @@ export default function ShoppingCart( {cartItems, setCartItems, localStorageName
         setTableValue(newValue);
     };
 
-    useEffect(() => localStorage.setItem(localStorageNames.deliveryType, JSON.stringify(deliveryType)), 
-    [deliveryType])
+    const payuRedirectURL = localStorage.getItem('payuRedirectURL');
 
-    useEffect(() => localStorage.setItem(localStorageNames.address, JSON.stringify(address)), 
-    [address])
+    useEffect(() => localStorage.setItem(localStorageNames.deliveryType, JSON.stringify(deliveryType)),
+        [deliveryType])
+
+    useEffect(() => localStorage.setItem(localStorageNames.address, JSON.stringify(address)),
+        [address])
 
     return (
         <div>
-            <h1> {disableSubmtion? 'Your order' : 'Place your order'} </h1>
+            <h1> {disableSubmtion ? 'Your order' : 'Place your order'} </h1>
             <Box>
                 <Tabs
                     value={tableValue}
@@ -50,39 +53,39 @@ export default function ShoppingCart( {cartItems, setCartItems, localStorageName
                     <Tab label="1. Cart content" />
                     <Tab label="2. Delivery type" />
                     <Tab label="3. Address" />
-                    {disableSubmtion? '' : <Tab label="4. Confirm" />}
+                    {disableSubmtion ? <Tab label='4. Pay for previous order' /> : <Tab label="4. Confirm" />}
                 </Tabs>
             </Box>
             {(() => {
-                switch (tableValue+1) {
-                    case 1: 
-                        return <ShoppingCartComponent cartItems={cartItems} setCartItems={setCartItems} disableSubmtion={disableSubmtion}/>;
+                switch (tableValue + 1) {
+                    case 1:
+                        return <ShoppingCartComponent cartItems={cartItems} setCartItems={setCartItems} disableSubmtion={disableSubmtion} />;
                     case 2:
                         return (
-                            <div> 
-                                <h1>Chosen delivery id: {deliveryType? deliveryType.name : 'None'}</h1> 
-                                <WithListHOC WrappedComponent={ChooseDeliveryTypeComponent} API_LINK={STATIC_LINKS.DELIVERY_TYPES} 
-                                    setCartItems={disableSubmtion? () => null : setDeliveryType} />
+                            <div>
+                                <h1>Chosen delivery type: {deliveryType ? deliveryType.name : 'None'}</h1>
+                                <WithListHOC WrappedComponent={ChooseDeliveryTypeComponent} API_LINK={STATIC_LINKS.DELIVERY_TYPES}
+                                    setCartItems={disableSubmtion ? () => null : setDeliveryType} />
                             </ div>
                         )
-                    case 3: 
+                    case 3:
                         return <CreateAddressComponent address={address} setAddress={setAddress} disableSubmtion={disableSubmtion} />;
                     case 4:
-                        return <ConfirmOrderComponent cartItems={cartItems} setCartItems={setCartItems} address={address} 
+                        return <ConfirmOrderComponent cartItems={cartItems} setCartItems={setCartItems} address={address}
                             deliveryType={deliveryType} setDeliveryType={setDeliveryType} setAddress={setAddress}
-                            setIsModalShown={setIsModalShown} />;
+                            setIsModalShown={setIsModalShown} payuRedirectURL={disableSubmtion? payuRedirectURL : null}/>;
                     default:
                         return {};
                 }
             })()}
-            <ThankYouModal isModalShown={isModalShown} modalMessage={modalMessage}/>
+            <ThankYouModal isModalShown={isModalShown} modalMessage={modalMessage} />
         </div>
     );
 }
 
-ShoppingCart.defaultProps = { 
+ShoppingCart.defaultProps = {
     localStorageNames: {
-        deliveryTypeId: "presentDeliveryType",
+        deliveryType: "presentDeliveryType",
         address: 'presentAddress'
     }
 };
